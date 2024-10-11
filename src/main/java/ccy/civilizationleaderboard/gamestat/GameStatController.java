@@ -1,6 +1,7 @@
 package ccy.civilizationleaderboard.gamestat;
 
 import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
+import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
 import lombok.RequiredArgsConstructor;
@@ -27,15 +28,41 @@ public class GameStatController {
     }
 
 
+    @GetMapping("/gamestats/{gameId}")
+    public ResponseEntity<GameStatResponse> getAllGameStatsByGameId(@PathVariable int gameId) {
+        return null;
+    }
+
+
+
+
+
+
     @PostMapping("")
     public ResponseEntity<GameStatResponse> createGameStat(@RequestBody CreateGameStat createRequest) {
 
         boolean doesExist = gameStatService.doesGameStatExist(createRequest);
-        if (!doesExist) {
+        if (doesExist) {
             return ResponseEntity.badRequest().build();
         }
 
         GameStatResponse gameStatResponse = gameStatService.createGameStat(createRequest);
+        return ResponseEntity.ok(gameStatResponse);
+    }
+
+
+
+
+
+    @PutMapping("")
+    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody EditGameStat editRequest) {
+        boolean doesExist = gameStatService.doesGameStatExist(editRequest);
+
+        if (doesExist) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        GameStatResponse gameStatResponse = gameStatService.editGameStat(editRequest);
         return ResponseEntity.ok(gameStatResponse);
     }
 }
