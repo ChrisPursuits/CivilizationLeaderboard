@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 public class CivilizationServiceImpl implements CivilizationService {
 
     @Override
-    public Civilization getCivilizationBy(int id) {
+    public RequestCivilization getCivilizationBy(int id) {
         return null;
     }
 
     @Override
-    public Civilization getCivilizationBy(String name) {
+    public RequestCivilization getCivilizationBy(String name) {
         return null;
     }
 }
