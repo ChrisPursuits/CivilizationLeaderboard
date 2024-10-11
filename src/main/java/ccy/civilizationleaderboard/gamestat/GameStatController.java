@@ -34,6 +34,8 @@ public class GameStatController {
     }
 
 
+    //this method does not make use of the validation helper methods because they check the existence of gameStat.
+    //this method checks for game and not gameStat.
     @GetMapping("/{gameId}")
     public ResponseEntity<Set<GameStatResponse>> getAllGameStatsByGameId(@PathVariable Integer gameId) {
 
