@@ -7,10 +7,14 @@ import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import java.util.Set;
 
 public interface GameStatService {
+    //Crud
     GameStatResponse getGameStatById(int id );
     Set<GameStatResponse> getAllGameStatsByGameId(int gameId);
     GameStatResponse createGameStat(CreateGameStat gameStat);
     GameStatResponse editGameStat(EditGameStat gameStat);
     void deleteGameStatById(int id);
 
+    //other
+    boolean doesGameStatExist(CreateGameStat gameStat);
+    boolean doesGameStatExist(EditGameStat gameStat);
 }
