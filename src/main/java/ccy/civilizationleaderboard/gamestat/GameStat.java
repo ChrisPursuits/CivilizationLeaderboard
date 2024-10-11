@@ -35,6 +35,7 @@ public class GameStat {
     private Civilization civilization;
 
 
+    //used in Create- and EditGameStatMapper
     public GameStat(Placement placement, int victoryPoints, int militaryPoints, int sciencePoints, int culturePoints, int gold, int religiousPoints, int diplomaticPoints) {
         this.placement = placement;
         this.victoryPoints = victoryPoints;
