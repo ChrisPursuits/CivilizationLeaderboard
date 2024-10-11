@@ -8,11 +8,11 @@ import java.util.Set;
 
 public interface GameStatService {
     //Crud
-    GameStatResponse getGameStatById(int id );
+    GameStatResponse getGameStatBy(int id );
     Set<GameStatResponse> getAllGameStatsByGameId(int gameId);
     GameStatResponse createGameStat(CreateGameStat gameStat);
     GameStatResponse editGameStat(EditGameStat gameStat);
-    void deleteGameStatById(int id);
+    void deleteGameStatBy(int id);
 
     //other
     boolean doesGameStatExist(CreateGameStat gameStat);

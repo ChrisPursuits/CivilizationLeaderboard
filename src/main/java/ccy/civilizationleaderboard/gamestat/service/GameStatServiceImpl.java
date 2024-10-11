@@ -26,7 +26,7 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public GameStatResponse getGameStatById(int id) {
+    public GameStatResponse getGameStatBy(int id) {
 
         Optional<GameStat> gameStatOptional = gameStatRepository.findById(id);
         if (gameStatOptional.isEmpty()) {
@@ -69,7 +69,7 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public void deleteGameStatById(int id) {
+    public void deleteGameStatBy(int id) {
         gameStatRepository.deleteById(id);
     }
 

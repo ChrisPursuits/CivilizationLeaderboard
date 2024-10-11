@@ -18,7 +18,7 @@ public class GameStatController {
 
     @GetMapping("/{gameStatId}")
     public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable int gameStatId) {
-        GameStatResponse gameStatResponse = gameStatService.getGameStatById(gameStatId);
+        GameStatResponse gameStatResponse = gameStatService.getGameStatBy(gameStatId);
 
         if (gameStatResponse == null) {
             return ResponseEntity.notFound().build();
@@ -28,7 +28,7 @@ public class GameStatController {
     }
 
 
-    @GetMapping("/gamestats/{gameId}")
+    @GetMapping("s/{gameId}")
     public ResponseEntity<GameStatResponse> getAllGameStatsByGameId(@PathVariable int gameId) {
         return null;
     }
@@ -72,6 +72,7 @@ public class GameStatController {
             return ResponseEntity.notFound().build();
         }
 
+        gameStatService.deleteGameStatBy(gameStatId);
         return ResponseEntity.noContent().build();
     }
 }
