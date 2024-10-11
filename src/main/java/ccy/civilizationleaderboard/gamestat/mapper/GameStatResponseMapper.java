@@ -1,16 +1,18 @@
-package ccy.civilizationleaderboard.gamestat;
+package ccy.civilizationleaderboard.gamestat.mapper;
 
+import ccy.civilizationleaderboard.gamestat.GameStat;
+import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
 @Component
-public class RequestGameStatMapper implements Function<GameStat, RequestGameStat> {
+public class GameStatResponseMapper implements Function<GameStat, GameStatResponse> {
 
 
     @Override
-    public RequestGameStat apply(GameStat gameStat) {
-        return new RequestGameStat(
+    public GameStatResponse apply(GameStat gameStat) {
+        return new GameStatResponse(
                 gameStat.getId(),
                 gameStat.getPlacement(),
                 gameStat.getVictoryPoints(),
