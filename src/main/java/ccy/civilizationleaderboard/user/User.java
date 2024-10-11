@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -37,9 +38,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "leaderboard_id")
     private Leaderboard leaderboard;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "game_id")
-    private Game game;
+    private Set<Game> game;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -24,7 +24,8 @@ public class Game {
     private String title;
     private String description;
 
-    @OneToOne(mappedBy = "game")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany
