@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.user;
 
+import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,10 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "leaderboard_id")
+    private Leaderboard leaderboard;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
