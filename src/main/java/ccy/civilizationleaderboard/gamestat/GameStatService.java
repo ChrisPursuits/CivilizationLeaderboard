@@ -2,12 +2,12 @@ package ccy.civilizationleaderboard.gamestat;
 
 import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
-import ccy.civilizationleaderboard.gamestat.dto.RequestGameStat;
+import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 
 public interface GameStatService {
-    RequestGameStat getGameStatById(int id );
-    RequestGameStat createGameStat(CreateGameStat gameStat);
-    RequestGameStat editGameStat(EditGameStat gameStat);
+    GameStatResponse getGameStatById(int id );
+    GameStatResponse createGameStat(CreateGameStat gameStat);
+    GameStatResponse editGameStat(EditGameStat gameStat);
     void deleteGameStatById(int id);
 
 }
