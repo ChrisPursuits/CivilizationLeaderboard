@@ -54,11 +54,11 @@ public class GameStatController {
     @PostMapping
     public ResponseEntity<GameStatResponse> createGameStat(@RequestBody GameStatRequest createRequest) {
 
-
-
-        boolean doesExist = gameStatService.doesGameStatExist(createRequest);
-        if (doesExist) {
-            return ResponseEntity.badRequest().build();
+        ResponseEntity<Void> validationResponse = isRequestBodyValid(createRequest);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status( validationResponse.getStatusCode() )
+                    .build();
         }
 
         GameStatResponse gameStatResponse = gameStatService.createGameStat(createRequest);
@@ -68,10 +68,12 @@ public class GameStatController {
 
     @PutMapping
     public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest editRequest) {
-        boolean doesExist = gameStatService.doesGameStatExist(editRequest);
 
-        if (doesExist) {
-            return ResponseEntity.badRequest().build();
+        ResponseEntity<Void> validationResponse = isRequestBodyValid(editRequest);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status( validationResponse.getStatusCode() )
+                    .build();
         }
 
         GameStatResponse gameStatResponse = gameStatService.editGameStat(editRequest);
@@ -96,6 +98,8 @@ public class GameStatController {
 
 
 
+
+
     private ResponseEntity<Void> isPathVariableValid(Integer pathVariable) {
 
         if (pathVariable == null || pathVariable <= 0) {
@@ -103,6 +107,21 @@ public class GameStatController {
         }
 
         boolean doesExist = gameStatService.doesGameStatExist(pathVariable);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return null;
+    }
+
+
+    private ResponseEntity<Void> isRequestBodyValid(GameStatRequest requestBody) {
+
+        if (requestBody == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        boolean doesExist = gameStatService.doesGameStatExist(requestBody);
         if (!doesExist) {
             return ResponseEntity.notFound().build();
         }
