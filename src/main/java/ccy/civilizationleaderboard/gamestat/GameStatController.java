@@ -34,10 +34,6 @@ public class GameStatController {
     }
 
 
-
-
-
-
     @PostMapping("")
     public ResponseEntity<GameStatResponse> createGameStat(@RequestBody CreateGameStat createRequest) {
 
@@ -51,9 +47,6 @@ public class GameStatController {
     }
 
 
-
-
-
     @PutMapping("")
     public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody EditGameStat editRequest) {
         boolean doesExist = gameStatService.doesGameStatExist(editRequest);
@@ -64,5 +57,21 @@ public class GameStatController {
 
         GameStatResponse gameStatResponse = gameStatService.editGameStat(editRequest);
         return ResponseEntity.ok(gameStatResponse);
+    }
+
+
+    @DeleteMapping("/{gameStatId}")
+    public ResponseEntity<Void> deleteGameStat(@PathVariable Integer gameStatId) {
+
+        if (gameStatId == null || gameStatId <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        boolean doesExist = gameStatService.doesGameStatExist(gameStatId);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 }
