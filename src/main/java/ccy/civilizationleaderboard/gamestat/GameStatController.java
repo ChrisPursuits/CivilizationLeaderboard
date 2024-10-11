@@ -1,8 +1,7 @@
 package ccy.civilizationleaderboard.gamestat;
 
 import ccy.civilizationleaderboard.game.GameService;
-import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
-import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
+import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +52,7 @@ public class GameStatController {
 
 
     @PostMapping
-    public ResponseEntity<GameStatResponse> createGameStat(@RequestBody CreateGameStat createRequest) {
+    public ResponseEntity<GameStatResponse> createGameStat(@RequestBody GameStatRequest createRequest) {
 
 
 
@@ -68,7 +67,7 @@ public class GameStatController {
 
 
     @PutMapping
-    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody EditGameStat editRequest) {
+    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest editRequest) {
         boolean doesExist = gameStatService.doesGameStatExist(editRequest);
 
         if (doesExist) {
