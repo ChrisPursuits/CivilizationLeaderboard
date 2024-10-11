@@ -102,4 +102,8 @@ public class GameStatServiceImpl implements GameStatService {
         );
     }
 
+    @Override
+    public boolean doesGameStatExist(int id) {
+        return gameStatRepository.existsById(id);
+    }
 }
