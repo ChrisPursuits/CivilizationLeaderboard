@@ -17,4 +17,5 @@ public interface GameStatService {
     //other
     boolean doesGameStatExist(CreateGameStat gameStat);
     boolean doesGameStatExist(EditGameStat gameStat);
+    boolean doesGameStatExist(int id);
 }
