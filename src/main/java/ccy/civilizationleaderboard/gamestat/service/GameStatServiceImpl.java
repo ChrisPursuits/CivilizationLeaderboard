@@ -25,8 +25,6 @@ public class GameStatServiceImpl implements GameStatService {
     private final GameStatRepository gameStatRepository;
 
 
-
-
     @Override
     public GameStatResponse getGameStatById(int id) {
 
@@ -50,9 +48,6 @@ public class GameStatServiceImpl implements GameStatService {
     }
 
 
-
-
-
     @Override
     public GameStatResponse createGameStat(CreateGameStat createRequest) {
 
@@ -61,9 +56,6 @@ public class GameStatServiceImpl implements GameStatService {
 
         return gameStatResponseMapper.apply(savedGameStat);
     }
-
-
-
 
 
     @Override
@@ -76,11 +68,38 @@ public class GameStatServiceImpl implements GameStatService {
     }
 
 
-
-
-
     @Override
     public void deleteGameStatById(int id) {
         gameStatRepository.deleteById(id);
     }
+
+
+    @Override
+    public boolean doesGameStatExist(CreateGameStat gameStat) {
+        return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+                gameStat.placement(),
+                gameStat.victoryPoints(),
+                gameStat.militaryPoints(),
+                gameStat.sciencePoints(),
+                gameStat.culturePoints(),
+                gameStat.gold(),
+                gameStat.religiousPoints(),
+                gameStat.diplomaticPoints()
+        );
+    }
+
+    @Override
+    public boolean doesGameStatExist(EditGameStat gameStat) {
+        return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+                gameStat.placement(),
+                gameStat.victoryPoints(),
+                gameStat.militaryPoints(),
+                gameStat.sciencePoints(),
+                gameStat.culturePoints(),
+                gameStat.gold(),
+                gameStat.religiousPoints(),
+                gameStat.diplomaticPoints()
+        );
+    }
+
 }
