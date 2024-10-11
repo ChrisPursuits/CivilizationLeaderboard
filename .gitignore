@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### COSTUME ###
-src/main/java/resources/application-dev.propertoes
+src/main/resources/application-dev.properties
 
 ### STS ###
 .apt_generated
