@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.gamestat.mapper;
 
-import ccy.civilizationleaderboard.gamestat.GameStat;
+import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
 import org.springframework.stereotype.Component;
 

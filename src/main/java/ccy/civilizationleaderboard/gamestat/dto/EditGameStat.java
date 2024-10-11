@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.gamestat.dto;
 
-import ccy.civilizationleaderboard.gamestat.Placement;
+import ccy.civilizationleaderboard.gamestat.model.Placement;
 
 public record EditGameStat(
         Placement placement,

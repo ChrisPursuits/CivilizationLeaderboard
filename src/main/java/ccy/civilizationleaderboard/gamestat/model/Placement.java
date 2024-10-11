@@ -1,4 +1,4 @@
-package ccy.civilizationleaderboard.gamestat;
+package ccy.civilizationleaderboard.gamestat.model;
 
 public enum Placement {
     FIRST,

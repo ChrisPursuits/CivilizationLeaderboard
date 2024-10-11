@@ -1,4 +1,4 @@
-package ccy.civilizationleaderboard.gamestat;
+package ccy.civilizationleaderboard.gamestat.model;
 
 import ccy.civilizationleaderboard.civilization.Civilization;
 import ccy.civilizationleaderboard.game.Game;

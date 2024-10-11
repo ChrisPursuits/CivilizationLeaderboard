@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.game;
 
-import ccy.civilizationleaderboard.gamestat.GameStat;
+import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

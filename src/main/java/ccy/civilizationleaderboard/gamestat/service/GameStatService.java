@@ -1,4 +1,4 @@
-package ccy.civilizationleaderboard.gamestat;
+package ccy.civilizationleaderboard.gamestat.service;
 
 import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
