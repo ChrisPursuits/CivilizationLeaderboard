@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +37,16 @@ public class GameStatServiceImpl implements GameStatService {
 
         GameStat gameStat = gameStatOptional.get();
         return gameStatResponseMapper.apply(gameStat);
+    }
+
+
+    @Override
+    public Set<GameStatResponse> getAllGameStatsByGameId(int gameId) {
+        Set<GameStat> gameStatSet = gameStatRepository.findGameStatsByGameId(gameId);
+
+        return gameStatSet.stream()
+                .map(gameStatResponseMapper)
+                .collect(Collectors.toSet());
     }
 
 
