@@ -1,6 +1,8 @@
-package ccy.civilizationleaderboard.gamestat;
+package ccy.civilizationleaderboard.gamestat.dto;
 
-public record RequestGameStat(
+import ccy.civilizationleaderboard.gamestat.Placement;
+
+public record GameStatResponse(
         int id,
         Placement placement,
         int victoryPoints,
