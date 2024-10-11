@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.gamestat;
 
+import ccy.civilizationleaderboard.game.GameService;
 import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
@@ -8,34 +9,53 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/v1/gamestat")
 @RequiredArgsConstructor
 public class GameStatController {
 
+    private final GameService gameService;
     private final GameStatService gameStatService;
 
 
     @GetMapping("/{gameStatId}")
-    public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable int gameStatId) {
-        GameStatResponse gameStatResponse = gameStatService.getGameStatBy(gameStatId);
+    public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable Integer gameStatId) {
 
-        if (gameStatResponse == null) {
-            return ResponseEntity.notFound().build();
+        ResponseEntity<Void> validationResponse = isPathVariableValid(gameStatId);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status( validationResponse.getStatusCode() )
+                    .build();
         }
 
+        GameStatResponse gameStatResponse = gameStatService.getGameStatBy(gameStatId);
         return ResponseEntity.ok(gameStatResponse);
     }
 
 
-    @GetMapping("s/{gameId}")
-    public ResponseEntity<GameStatResponse> getAllGameStatsByGameId(@PathVariable int gameId) {
-        return null;
+    @GetMapping("/{gameId}")
+    public ResponseEntity<Set<GameStatResponse>> getAllGameStatsByGameId(@PathVariable Integer gameId) {
+
+        if (gameId == null || gameId <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        boolean doesExist = gameService.doesGameExist(gameId);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Set<GameStatResponse> allGameStats = gameStatService.getAllGameStatsByGameId(gameId);
+        return ResponseEntity.ok(allGameStats);
     }
 
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<GameStatResponse> createGameStat(@RequestBody CreateGameStat createRequest) {
+
+
 
         boolean doesExist = gameStatService.doesGameStatExist(createRequest);
         if (doesExist) {
@@ -47,7 +67,7 @@ public class GameStatController {
     }
 
 
-    @PutMapping("")
+    @PutMapping
     public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody EditGameStat editRequest) {
         boolean doesExist = gameStatService.doesGameStatExist(editRequest);
 
@@ -63,16 +83,31 @@ public class GameStatController {
     @DeleteMapping("/{gameStatId}")
     public ResponseEntity<Void> deleteGameStat(@PathVariable Integer gameStatId) {
 
-        if (gameStatId == null || gameStatId <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        boolean doesExist = gameStatService.doesGameStatExist(gameStatId);
-        if (!doesExist) {
-            return ResponseEntity.notFound().build();
+        ResponseEntity<Void> validationResponse = isPathVariableValid(gameStatId);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status( validationResponse.getStatusCode() )
+                    .build();
         }
 
         gameStatService.deleteGameStatBy(gameStatId);
         return ResponseEntity.noContent().build();
+    }
+
+
+
+
+    private ResponseEntity<Void> isPathVariableValid(Integer pathVariable) {
+
+        if (pathVariable == null || pathVariable <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        boolean doesExist = gameStatService.doesGameStatExist(pathVariable);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return null;
     }
 }
