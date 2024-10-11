@@ -2,7 +2,7 @@ package ccy.civilizationleaderboard.gamestat.dto;
 
 import ccy.civilizationleaderboard.gamestat.model.Placement;
 
-public record CreateGameStat(
+public record GameStatRequest(
         Placement placement,
         int victoryPoints,
         int militaryPoints,

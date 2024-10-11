@@ -2,10 +2,10 @@ package ccy.civilizationleaderboard.gamestat.service;
 
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
-import ccy.civilizationleaderboard.gamestat.dto.CreateGameStat;
+import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.EditGameStat;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
-import ccy.civilizationleaderboard.gamestat.mapper.CreateGameStatMapper;
+import ccy.civilizationleaderboard.gamestat.mapper.GameStatRequestMapper;
 import ccy.civilizationleaderboard.gamestat.mapper.EditGameStatMapper;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatResponseMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class GameStatServiceImpl implements GameStatService {
 
     private final GameStatResponseMapper gameStatResponseMapper;
-    private final CreateGameStatMapper createGameStatMapper;
+    private final GameStatRequestMapper gameStatRequestMapper;
     private final EditGameStatMapper editGameStatMapper;
     private final GameStatRepository gameStatRepository;
 
@@ -49,9 +49,9 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public GameStatResponse createGameStat(CreateGameStat createRequest) {
+    public GameStatResponse createGameStat(GameStatRequest createRequest) {
 
-        GameStat gameStat = createGameStatMapper.apply(createRequest);
+        GameStat gameStat = gameStatRequestMapper.apply(createRequest);
         GameStat savedGameStat = gameStatRepository.save(gameStat);
 
         return gameStatResponseMapper.apply(savedGameStat);
@@ -75,7 +75,7 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public boolean doesGameStatExist(CreateGameStat gameStat) {
+    public boolean doesGameStatExist(GameStatRequest gameStat) {
         return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
                 gameStat.placement(),
                 gameStat.victoryPoints(),
