@@ -4,7 +4,10 @@ import ccy.civilizationleaderboard.game.service.GameService;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
+import ccy.civilizationleaderboard.requestvalidator.EntityType;
+import ccy.civilizationleaderboard.requestvalidator.RequestValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +18,15 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class GameStatController {
 
-    private final GameService gameService;
     private final GameStatService gameStatService;
+    private final RequestValidator requestValidator;
 
 
     @GetMapping("/{gameStatId}")
     public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable Integer gameStatId) {
 
-        ResponseEntity<Void> validationResponse = isPathVariableValid(gameStatId);
+
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.GAMESTAT, gameStatId);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
@@ -39,13 +43,11 @@ public class GameStatController {
     @GetMapping("/{gameId}")
     public ResponseEntity<Set<GameStatResponse>> getAllGameStatsByGameId(@PathVariable Integer gameId) {
 
-        if (gameId == null || gameId <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        boolean doesExist = gameService.doesExist(gameId);
-        if (!doesExist) {
-            return ResponseEntity.notFound().build();
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.GAME, gameId);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status( validationResponse.getStatusCode() )
+                    .build();
         }
 
         Set<GameStatResponse> allGameStats = gameStatService.getAllGameStatsByGameId(gameId);
@@ -56,7 +58,7 @@ public class GameStatController {
     @PostMapping
     public ResponseEntity<GameStatResponse> createGameStat(@RequestBody GameStatRequest postRequest) {
 
-        ResponseEntity<Void> validationResponse = isRequestBodyValid(postRequest);
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.POST, EntityType.GAMESTAT, postRequest);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
@@ -71,7 +73,8 @@ public class GameStatController {
     @PutMapping
     public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest putRequest) {
 
-        ResponseEntity<Void> validationResponse = isRequestBodyValid(putRequest);
+        int id = putRequest.id();
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.PUT, EntityType.GAMESTAT, id);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
@@ -86,7 +89,7 @@ public class GameStatController {
     @DeleteMapping("/{gameStatId}")
     public ResponseEntity<Void> deleteGameStat(@PathVariable Integer gameStatId) {
 
-        ResponseEntity<Void> validationResponse = isPathVariableValid(gameStatId);
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.DELETE, EntityType.GAMESTAT, gameStatId);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
