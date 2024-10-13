@@ -71,22 +71,23 @@ public class GameStatServiceImpl implements GameStatService {
     }
 
 
+
     @Override
-    public boolean doesGameStatExist(GameStatRequest gameStat) {
+    public boolean doesExist(GameStatRequest postRequest) {
         return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
-                gameStat.placement(),
-                gameStat.victoryPoints(),
-                gameStat.militaryPoints(),
-                gameStat.sciencePoints(),
-                gameStat.culturePoints(),
-                gameStat.gold(),
-                gameStat.religiousPoints(),
-                gameStat.diplomaticPoints()
+                postRequest.placement(),
+                postRequest.victoryPoints(),
+                postRequest.militaryPoints(),
+                postRequest.sciencePoints(),
+                postRequest.culturePoints(),
+                postRequest.gold(),
+                postRequest.religiousPoints(),
+                postRequest.diplomaticPoints()
         );
     }
 
     @Override
-    public boolean doesGameStatExist(int id) {
+    public boolean doesExist(int id) {
         return gameStatRepository.existsById(id);
     }
 }
