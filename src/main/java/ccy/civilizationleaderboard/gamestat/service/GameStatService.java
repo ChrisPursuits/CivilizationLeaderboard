@@ -9,11 +9,11 @@ public interface GameStatService {
     //Crud
     GameStatResponse getGameStatBy(int id );
     Set<GameStatResponse> getAllGameStatsByGameId(int gameId);
-    GameStatResponse createGameStat(GameStatRequest createRequest);
-    GameStatResponse editGameStat(GameStatRequest editRequest);
+    GameStatResponse createGameStat(GameStatRequest postRequest);
+    GameStatResponse editGameStat(GameStatRequest putRequest);
     void deleteGameStatBy(int id);
 
     //other
-    boolean doesGameStatExist(GameStatRequest gameStat);
-    boolean doesGameStatExist(int id);
+    boolean doesExist(GameStatRequest postRequest);
+    boolean doesExist(int id);
 }
