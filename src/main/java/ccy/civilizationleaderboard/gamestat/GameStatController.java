@@ -99,38 +99,4 @@ public class GameStatController {
         gameStatService.deleteGameStatBy(gameStatId);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
-    private ResponseEntity<Void> isPathVariableValid(Integer pathVariable) {
-
-        if (pathVariable == null || pathVariable <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        boolean doesExist = gameStatService.doesExist(pathVariable);
-        if (!doesExist) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return null;
-    }
-
-
-    private ResponseEntity<Void> isRequestBodyValid(GameStatRequest requestBody) {
-
-        if (requestBody == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        boolean doesExist = gameStatService.doesExist(requestBody);
-        if (!doesExist) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return null;
-    }
 }
