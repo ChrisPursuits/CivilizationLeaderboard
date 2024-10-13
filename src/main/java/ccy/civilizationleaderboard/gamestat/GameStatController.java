@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.gamestat;
 
-import ccy.civilizationleaderboard.game.GameService;
+import ccy.civilizationleaderboard.game.service.GameService;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
@@ -43,7 +43,7 @@ public class GameStatController {
             return ResponseEntity.badRequest().build();
         }
 
-        boolean doesExist = gameService.doesGameExist(gameId);
+        boolean doesExist = gameService.doesExist(gameId);
         if (!doesExist) {
             return ResponseEntity.notFound().build();
         }
@@ -54,31 +54,31 @@ public class GameStatController {
 
 
     @PostMapping
-    public ResponseEntity<GameStatResponse> createGameStat(@RequestBody GameStatRequest createRequest) {
+    public ResponseEntity<GameStatResponse> createGameStat(@RequestBody GameStatRequest postRequest) {
 
-        ResponseEntity<Void> validationResponse = isRequestBodyValid(createRequest);
+        ResponseEntity<Void> validationResponse = isRequestBodyValid(postRequest);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
                     .build();
         }
 
-        GameStatResponse gameStatResponse = gameStatService.createGameStat(createRequest);
+        GameStatResponse gameStatResponse = gameStatService.createGameStat(postRequest);
         return ResponseEntity.ok(gameStatResponse);
     }
 
 
     @PutMapping
-    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest editRequest) {
+    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest putRequest) {
 
-        ResponseEntity<Void> validationResponse = isRequestBodyValid(editRequest);
+        ResponseEntity<Void> validationResponse = isRequestBodyValid(putRequest);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
                     .build();
         }
 
-        GameStatResponse gameStatResponse = gameStatService.editGameStat(editRequest);
+        GameStatResponse gameStatResponse = gameStatService.editGameStat(putRequest);
         return ResponseEntity.ok(gameStatResponse);
     }
 
@@ -108,7 +108,7 @@ public class GameStatController {
             return ResponseEntity.badRequest().build();
         }
 
-        boolean doesExist = gameStatService.doesGameStatExist(pathVariable);
+        boolean doesExist = gameStatService.doesExist(pathVariable);
         if (!doesExist) {
             return ResponseEntity.notFound().build();
         }
@@ -123,7 +123,7 @@ public class GameStatController {
             return ResponseEntity.badRequest().build();
         }
 
-        boolean doesExist = gameStatService.doesGameStatExist(requestBody);
+        boolean doesExist = gameStatService.doesExist(requestBody);
         if (!doesExist) {
             return ResponseEntity.notFound().build();
         }
