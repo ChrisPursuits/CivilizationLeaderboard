@@ -1,6 +1,5 @@
 package ccy.civilizationleaderboard.gamestat;
 
-import ccy.civilizationleaderboard.game.service.GameService;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
@@ -22,18 +21,18 @@ public class GameStatController {
     private final RequestValidator requestValidator;
 
 
-    @GetMapping("/{gameStatId}")
-    public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable Integer gameStatId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<GameStatResponse> getGameStatById(@PathVariable Integer id) {
 
 
-        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.GAMESTAT, gameStatId);
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.GAMESTAT, id);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
                     .build();
         }
 
-        GameStatResponse gameStatResponse = gameStatService.getGameStatBy(gameStatId);
+        GameStatResponse gameStatResponse = gameStatService.getGameStatBy(id);
         return ResponseEntity.ok(gameStatResponse);
     }
 
@@ -70,10 +69,9 @@ public class GameStatController {
     }
 
 
-    @PutMapping
-    public ResponseEntity<GameStatResponse> updateGameStat(@RequestBody GameStatRequest putRequest) {
+    @PutMapping("/{id}")
+    public ResponseEntity<GameStatResponse> updateGameStat(@PathVariable int id, @RequestBody GameStatRequest putRequest) {
 
-        int id = putRequest.id();
         ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.PUT, EntityType.GAMESTAT, id);
         if (validationResponse != null) {
             return ResponseEntity
@@ -81,22 +79,22 @@ public class GameStatController {
                     .build();
         }
 
-        GameStatResponse gameStatResponse = gameStatService.editGameStat(putRequest);
+        GameStatResponse gameStatResponse = gameStatService.editGameStat(id, putRequest);
         return ResponseEntity.ok(gameStatResponse);
     }
 
 
-    @DeleteMapping("/{gameStatId}")
-    public ResponseEntity<Void> deleteGameStat(@PathVariable Integer gameStatId) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGameStat(@PathVariable Integer id) {
 
-        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.DELETE, EntityType.GAMESTAT, gameStatId);
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.DELETE, EntityType.GAMESTAT, id);
         if (validationResponse != null) {
             return ResponseEntity
                     .status( validationResponse.getStatusCode() )
                     .build();
         }
 
-        gameStatService.deleteGameStatBy(gameStatId);
+        gameStatService.deleteGameStatBy(id);
         return ResponseEntity.noContent().build();
     }
 }
