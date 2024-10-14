@@ -6,5 +6,5 @@ import ccy.civilizationleaderboard.user.User;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> findUserBy(String username);
+   User findUserBy(String username);
 }
