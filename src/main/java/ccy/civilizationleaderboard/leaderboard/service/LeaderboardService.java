@@ -7,7 +7,7 @@ public interface LeaderboardService {
 
     LeaderboardResponse getLeaderboardBy(int id);
     LeaderboardResponse createLeaderboard(LeaderboardRequest postRequest);
-    LeaderboardResponse editLeaderboard(LeaderboardRequest putRequest);
+    LeaderboardResponse editLeaderboard(int id, LeaderboardRequest putRequest);
     void deleteLeaderboard(int id);
 
     boolean doesExist(int id);
