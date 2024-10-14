@@ -29,8 +29,7 @@ public class Game {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    @JoinColumn(name = "game_stat_id")
+    @OneToMany(mappedBy = "game")
     private List<GameStat> gameStat;
 
     //used in GameRequestMapper
