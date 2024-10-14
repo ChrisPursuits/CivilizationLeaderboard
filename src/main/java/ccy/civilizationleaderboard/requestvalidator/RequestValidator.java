@@ -73,18 +73,9 @@ public class RequestValidator {
     private boolean doesExistByRequestBody(EntityType entity, Object requestBody) {
 
         return switch (entity) {
-            case LEADERBOARD -> {
-                assert requestBody instanceof LeaderboardRequest;
-                yield leaderboardService.doesExist((LeaderboardRequest) requestBody);
-            }
-            case GAME -> {
-                assert requestBody instanceof GameRequest;
-                yield gameService.doesExist((GameRequest) requestBody);
-            }
-            case GAMESTAT -> {
-                assert requestBody instanceof GameStatRequest;
-                yield gameStatService.doesExist((GameStatRequest) requestBody);
-            }
+            case LEADERBOARD -> requestBody instanceof LeaderboardRequest && leaderboardService.doesExist((LeaderboardRequest) requestBody);
+            case GAME -> requestBody instanceof GameRequest && gameService.doesExist((GameRequest) requestBody);
+            case GAMESTAT -> requestBody instanceof GameStatRequest && gameStatService.doesExist((GameStatRequest) requestBody);
         };
     }
 }
