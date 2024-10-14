@@ -1,7 +1,6 @@
 package ccy.civilizationleaderboard.config;
 
 import ccy.civilizationleaderboard.config.service.JwtService;
-import ccy.civilizationleaderboard.user.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
