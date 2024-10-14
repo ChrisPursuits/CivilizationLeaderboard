@@ -31,4 +31,10 @@ public class Game {
     @OneToMany
     @JoinColumn(name = "game_stat_id")
     private Set<GameStat> gameStat;
+
+    //used in GameRequestMapper
+    public Game(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }
