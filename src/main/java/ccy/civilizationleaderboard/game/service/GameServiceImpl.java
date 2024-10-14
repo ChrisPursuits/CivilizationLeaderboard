@@ -33,20 +33,39 @@ public class GameServiceImpl implements GameService {
         return gameResponseMapper.apply(gameResponse);
     }
 
-    @Override
-    public GameResponse createGame(GameRequest createRequest) {
-        return null;
-    }
+
 
     @Override
-    public GameResponse editGame(GameRequest editRequest) {
-        return null;
+    public GameResponse createGame(GameRequest postRequest) {
+
+        Game game = GameRequestMapper.apply(postRequest);
+        Game savedGame = gameRepository.save(game);
+
+        return gameResponseMapper.apply(savedGame);
     }
+
+
+
+    @Override
+    public GameResponse editGame(GameRequest putRequest) {
+
+        Game game = GameRequestMapper.apply(putRequest);
+        Game updatedGame = gameRepository.save(game);
+
+        return gameResponseMapper.apply(updatedGame);
+    }
+
+
 
     @Override
     public void deleteGameBy(int id) {
-
+        gameRepository.deleteById(id);
     }
+
+
+
+
+
 
     @Override
     public boolean doesExist(int id) {
