@@ -8,7 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -30,7 +31,7 @@ public class Game {
 
     @OneToMany
     @JoinColumn(name = "game_stat_id")
-    private Set<GameStat> gameStat;
+    private List<GameStat> gameStat;
 
     //used in GameRequestMapper
     public Game(String title, String description) {

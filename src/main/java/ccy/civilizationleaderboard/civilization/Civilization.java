@@ -7,7 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -22,5 +23,5 @@ public class Civilization {
     private String name;
 
     @OneToMany(mappedBy = "civilization")
-    private Set<GameStat> gameStatSet;
+    private List<GameStat> gameStatSet;
 }

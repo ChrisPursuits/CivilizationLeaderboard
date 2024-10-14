@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,7 +23,7 @@ public class Leaderboard {
     private String description;
 
     @OneToMany(mappedBy = "leaderboard")
-    private Set<User> user;
+    private List<User> user;
 
     //used in LeaderboardRequestMapper to map from dto to model
     public Leaderboard(String name, String description) {
