@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.config;
 
+import ccy.civilizationleaderboard.user.UserRepository;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userService.findUserBy(username)
+        return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
