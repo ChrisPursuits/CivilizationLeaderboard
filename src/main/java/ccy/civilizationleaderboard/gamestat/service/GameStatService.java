@@ -10,7 +10,7 @@ public interface GameStatService {
     GameStatResponse getGameStatBy(int id );
     Set<GameStatResponse> getAllGameStatsByGameId(int gameId);
     GameStatResponse createGameStat(GameStatRequest postRequest);
-    GameStatResponse editGameStat(GameStatRequest putRequest);
+    GameStatResponse editGameStat(int id, GameStatRequest putRequest);
     void deleteGameStatBy(int id);
 
     //other

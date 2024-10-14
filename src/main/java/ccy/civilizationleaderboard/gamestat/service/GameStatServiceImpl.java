@@ -46,9 +46,9 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public GameStatResponse createGameStat(GameStatRequest createRequest) {
+    public GameStatResponse createGameStat(GameStatRequest postRequest) {
 
-        GameStat gameStat = gameStatRequestMapper.apply(createRequest);
+        GameStat gameStat = gameStatRequestMapper.apply(postRequest);
         GameStat savedGameStat = gameStatRepository.save(gameStat);
 
         return gameStatResponseMapper.apply(savedGameStat);
@@ -56,9 +56,11 @@ public class GameStatServiceImpl implements GameStatService {
 
 
     @Override
-    public GameStatResponse editGameStat(GameStatRequest editRequest) {
+    public GameStatResponse editGameStat(int id, GameStatRequest putRequest) {
 
-        GameStat gameStat = gameStatRequestMapper.apply(editRequest);
+        GameStat gameStat = gameStatRequestMapper.apply(putRequest);
+        gameStat.setId(id);
+
         GameStat editedGameStat = gameStatRepository.save(gameStat);
 
         return gameStatResponseMapper.apply(editedGameStat);
