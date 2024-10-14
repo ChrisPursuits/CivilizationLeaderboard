@@ -42,6 +42,13 @@ public class User implements UserDetails {
     @JoinColumn(name = "game_id")
     private Set<Game> game;
 
+
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
