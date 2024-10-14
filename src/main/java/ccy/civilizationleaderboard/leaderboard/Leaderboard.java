@@ -24,4 +24,10 @@ public class Leaderboard {
 
     @OneToMany(mappedBy = "leaderboard")
     private Set<User> user;
+
+    //used in LeaderboardRequestMapper to map from dto to model
+    public Leaderboard(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
