@@ -7,7 +7,7 @@ public interface GameService {
     //crud
     GameResponse getGameBy(int id);
     GameResponse createGame(GameRequest postRequest);
-    GameResponse editGame(GameRequest putRequest);
+    GameResponse editGame(int id, GameRequest putRequest);
     void deleteGameBy(int id);
 
     //other

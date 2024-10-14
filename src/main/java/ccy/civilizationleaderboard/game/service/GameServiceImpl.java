@@ -47,9 +47,11 @@ public class GameServiceImpl implements GameService {
 
 
     @Override
-    public GameResponse editGame(GameRequest putRequest) {
+    public GameResponse editGame(int id, GameRequest putRequest) {
 
         Game game = GameRequestMapper.apply(putRequest);
+        game.setId(id);
+
         Game updatedGame = gameRepository.save(game);
 
         return gameResponseMapper.apply(updatedGame);
