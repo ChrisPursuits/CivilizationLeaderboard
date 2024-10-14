@@ -42,6 +42,7 @@ public class AuthenticationController {
             response = authenticationService.authenticate(loginRequest);
 
         }catch (Exception exception) {
+            //wrong credentials or username to be precise, but only tell user that it could be username or password.
             return ResponseEntity.badRequest().build();
         }
 

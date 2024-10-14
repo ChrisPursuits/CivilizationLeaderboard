@@ -43,6 +43,7 @@ public class User implements UserDetails {
     private Set<Game> game;
 
 
+    //used in AuthenticationServiceImpl for registering new users
     public User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
