@@ -13,7 +13,6 @@ public class GameStatRequestMapper implements Function<GameStatRequest, GameStat
     @Override
     public GameStat apply(GameStatRequest gameStatRequest) {
         return new GameStat(
-                gameStatRequest.id(),
                 gameStatRequest.placement(),
                 gameStatRequest.victoryPoints(),
                 gameStatRequest.militaryPoints(),
