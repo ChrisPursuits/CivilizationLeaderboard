@@ -6,8 +6,8 @@ import ccy.civilizationleaderboard.game.dto.GameResponse;
 public interface GameService {
     //crud
     GameResponse getGameBy(int id);
-    GameResponse createGame(GameRequest createRequest);
-    GameResponse editGame(GameRequest editRequest);
+    GameResponse createGame(GameRequest postRequest);
+    GameResponse editGame(GameRequest putRequest);
     void deleteGameBy(int id);
 
     //other
