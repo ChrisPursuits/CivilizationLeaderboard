@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+
 
 @Data
 @Entity
@@ -34,13 +34,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private int totalGamesPlayed;
+
+    @ElementCollection
+    @CollectionTable(name = "placement_history", joinColumns = @JoinColumn(name = "player_id"))
+    @Column(name = "placement")
+    private List<Integer> placementHistory;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "leaderboard_id")
     private Leaderboard leaderboard;
 
     @OneToMany
     @JoinColumn(name = "game_id")
-    private Set<Game> game;
+    private List<Game> game;
 
 
     //used in AuthenticationServiceImpl for registering new users
