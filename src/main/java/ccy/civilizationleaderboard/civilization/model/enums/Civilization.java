@@ -29,6 +29,7 @@ public enum Civilization {
     KHMER,
     KONGOLESE,
     KOREAN,
+    MACEDONIAN,
     MALIAN,
     MÃORI,
     MAPUCHE,
