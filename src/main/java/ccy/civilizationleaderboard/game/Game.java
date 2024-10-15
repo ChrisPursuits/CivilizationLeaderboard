@@ -26,9 +26,8 @@ public class Game {
     private String description;
     private int finishingRound;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(mappedBy = "gameList")
+    private List<User> user;
 
     @OneToMany(mappedBy = "game")
     private List<GameStat> gameStatList;

@@ -48,13 +48,18 @@ public class User implements UserDetails {
     //since the idea is that every civ 6 player should be able to create a leaderboard with their frinds the User owns the relationship
     @ManyToMany
     @JoinTable(
-            name = "leaderboard_user",
+            name = "leaderboard_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "leaderboard_id")
     )
     private List<Leaderboard> leaderboardList;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany
+    @JoinTable(
+            name = "user_games",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
     private List<Game> gameList;
 
 
