@@ -248,24 +248,28 @@ public class LoadTestData implements CommandLineRunner {
                 .username("Chris")
                 .password(passwordEncoder.encode("123"))
                 .role(Role.ROLE_USER)
+                .gameList(new ArrayList<>())
                 .build();
 
         User markus = User.builder()
                 .username("Markus")
                 .password(passwordEncoder.encode("123"))
                 .role(Role.ROLE_USER)
+                .gameList(new ArrayList<>())
                 .build();
 
         User engjëll = User.builder()
                 .username("Engjëll")
                 .password(passwordEncoder.encode("123"))
                 .role(Role.ROLE_USER)
+                .gameList(new ArrayList<>())
                 .build();
 
         User mikkel = User.builder()
                 .username("Mikkel")
                 .password(passwordEncoder.encode("123"))
                 .role(Role.ROLE_USER)
+                .gameList(new ArrayList<>())
                 .build();
 
         userRepository.save(chris); userRepository.save(markus); userRepository.save(engjëll); userRepository.save(mikkel);

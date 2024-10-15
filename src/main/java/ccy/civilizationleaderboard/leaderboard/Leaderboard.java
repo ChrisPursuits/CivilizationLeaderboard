@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -34,5 +35,6 @@ public class Leaderboard {
     public Leaderboard(String name, String description) {
         this.name = name;
         this.description = description;
+        this.userList = new ArrayList<>();
     }
 }

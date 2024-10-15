@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,5 +37,6 @@ public class Game {
     public Game(String title, String description) {
         this.title = title;
         this.description = description;
+        this.gameStatList = new ArrayList<>();
     }
 }
