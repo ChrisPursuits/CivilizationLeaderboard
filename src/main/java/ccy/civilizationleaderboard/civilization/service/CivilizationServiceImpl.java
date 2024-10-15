@@ -31,7 +31,7 @@ public class CivilizationServiceImpl implements CivilizationService {
 
     @Override
     public CivilizationResponse getCivilizationBy(String name) {
-        Optional<Civilization> civilizationOptional = civilizationRepository.findByCivilizationName(name);
+        Optional<Civilization> civilizationOptional = civilizationRepository.findCivilizationByLeader(name);
 
         if (civilizationOptional.isEmpty()) {
             return null;
