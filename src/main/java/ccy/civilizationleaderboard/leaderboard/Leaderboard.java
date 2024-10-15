@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.leaderboard;
 
-import ccy.civilizationleaderboard.user.User;
+import ccy.civilizationleaderboard.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

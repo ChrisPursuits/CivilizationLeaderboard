@@ -3,7 +3,7 @@ package ccy.civilizationleaderboard.login;
 import ccy.civilizationleaderboard.login.dto.AuthenticationRequest;
 import ccy.civilizationleaderboard.login.dto.AuthenticationResponse;
 import ccy.civilizationleaderboard.login.service.AuthenticationService;
-import ccy.civilizationleaderboard.user.User;
+import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
