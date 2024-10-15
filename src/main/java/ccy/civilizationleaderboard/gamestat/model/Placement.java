@@ -11,7 +11,7 @@ public enum Placement {
     EIGHTH,
     NINTH,
     TENTH,
-    ELEVEN,
+    ELEVENTH,
     TWELFTH,
 
 }
