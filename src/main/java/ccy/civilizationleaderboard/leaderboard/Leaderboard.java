@@ -22,8 +22,8 @@ public class Leaderboard {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "leaderboard")
-    private List<User> user;
+    @ManyToMany(mappedBy = "leaderboardList")
+    private List<User> userList;
 
     //used in LeaderboardRequestMapper to map from dto to model
     public Leaderboard(String name, String description) {

@@ -45,9 +45,14 @@ public class User implements UserDetails {
     //create a playedCivilizationTracker/history using a HashMap.
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "leaderboard_id")
-    private Leaderboard leaderboard;
+    //since the idea is that every civ 6 player should be able to create a leaderboard with their frinds the User owns the relationship
+    @ManyToMany
+    @JoinTable(
+            name = "leaderboard_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "leaderboard_id")
+    )
+    private List<Leaderboard> leaderboardList;
 
     @OneToMany(mappedBy = "user")
     private List<Game> gameList;
