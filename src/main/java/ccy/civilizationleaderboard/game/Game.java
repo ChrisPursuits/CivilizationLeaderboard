@@ -1,7 +1,7 @@
 package ccy.civilizationleaderboard.game;
 
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
-import ccy.civilizationleaderboard.user.User;
+import ccy.civilizationleaderboard.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,13 +24,14 @@ public class Game {
 
     private String title;
     private String description;
+    private int finishingRound;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "game")
-    private List<GameStat> gameStat;
+    private List<GameStat> gameStatList;
 
     //used in GameRequestMapper
     public Game(String title, String description) {
