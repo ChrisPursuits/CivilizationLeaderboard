@@ -1,8 +1,6 @@
 package ccy.civilizationleaderboard.user.service;
 
-import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
-import ccy.civilizationleaderboard.gamestat.model.Placement;
 import ccy.civilizationleaderboard.user.UserResponse;
 import ccy.civilizationleaderboard.user.UserResponseMapper;
 import ccy.civilizationleaderboard.user.model.User;
@@ -48,7 +46,9 @@ public class UserServiceImpl implements UserService {
 
             //calculate placementHistory
             List<Integer> placementHistory = new ArrayList<>(12); //max 12 placements
-            placementHistory = getCalculatedPlacementHistory(placementHistory, allUserGameStats);
+            calculatePlacementHistory(placementHistory, allUserGameStats);
+            //since placementHistory has been assigned a location in memory
+            //when I add elements to the list it do not need to return the list again. (hopefully this makes sence future me)
             user.setPlacementHistory(placementHistory);
         }
 
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private List<Integer> getCalculatedPlacementHistory(List<Integer> placementHistory, List<GameStat> allUserGameStats) {
+    private void calculatePlacementHistory(List<Integer> placementHistory, List<GameStat> allUserGameStats) {
         int firstPlaceCount = 0;
         int secondPlaceCount = 0;
         int thirdPlaceCount = 0;
@@ -142,6 +142,5 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
-        return placementHistory;
     }
 }

@@ -1,6 +1,5 @@
 package ccy.civilizationleaderboard.user;
 
-import ccy.civilizationleaderboard.game.dto.GameResponse;
 
 import java.util.List;
 

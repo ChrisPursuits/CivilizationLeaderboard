@@ -20,7 +20,7 @@ public class Civilization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization;//TODO perhaps make this to enum, for when adding played civilization history to User?
+    private ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization;
 
     @Column(unique = true)
     private String leader;

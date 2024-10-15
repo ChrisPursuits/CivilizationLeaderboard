@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsername(String username);
 
-    @Query("SELECT u FROM User u JOIN u.leaderboard l WHERE l.id = :leaderboardId " +
+    @Query("SELECT u FROM User u JOIN u.leaderboardList l WHERE l.id = :leaderboardId " +
             "ORDER BY " +
             "(SELECT COUNT(ph) FROM u.placementHistory ph WHERE ph = 1) DESC, " +
             "(SELECT COUNT(ph) FROM u.placementHistory ph WHERE ph = 2) DESC, " +
@@ -30,7 +30,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT gs FROM GameStat gs " +
             "JOIN gs.game g " +
-            "JOIN g.user u " +
+            "JOIN g.userList u " +
             "WHERE u.username = :username")
     List<GameStat> findAllGameStatsByUsername(String username);
 

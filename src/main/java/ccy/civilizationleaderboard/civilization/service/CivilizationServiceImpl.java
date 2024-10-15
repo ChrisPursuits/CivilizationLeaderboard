@@ -1,8 +1,8 @@
 package ccy.civilizationleaderboard.civilization.service;
 
 import ccy.civilizationleaderboard.civilization.CivilizationRepository;
-import ccy.civilizationleaderboard.civilization.RequestCivilization;
-import ccy.civilizationleaderboard.civilization.RequestCivilizationMapper;
+import ccy.civilizationleaderboard.civilization.CivilizationResponse;
+import ccy.civilizationleaderboard.civilization.CivilizationResponseMapper;
 import ccy.civilizationleaderboard.civilization.model.Civilization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import java.util.Optional;
 public class CivilizationServiceImpl implements CivilizationService {
 
     private final CivilizationRepository civilizationRepository;
-    private final RequestCivilizationMapper requestCivilizationMapper;
+    private final CivilizationResponseMapper civilizationResponseMapper;
 
     @Override
-    public RequestCivilization getCivilizationBy(int id) {
+    public CivilizationResponse getCivilizationBy(int id) {
         Optional<Civilization> civilizationOptional = civilizationRepository.findById(id);
 
         if (civilizationOptional.isEmpty()) {
@@ -25,12 +25,12 @@ public class CivilizationServiceImpl implements CivilizationService {
         }
 
         Civilization civilization = civilizationOptional.get();
-        RequestCivilization requestCivilization = requestCivilizationMapper.apply(civilization);
-        return requestCivilization;
+        CivilizationResponse civilizationResponse = civilizationResponseMapper.apply(civilization);
+        return civilizationResponse;
     }
 
     @Override
-    public RequestCivilization getCivilizationBy(String name) {
+    public CivilizationResponse getCivilizationBy(String name) {
         Optional<Civilization> civilizationOptional = civilizationRepository.findByCivilizationName(name);
 
         if (civilizationOptional.isEmpty()) {
@@ -38,7 +38,7 @@ public class CivilizationServiceImpl implements CivilizationService {
         }
 
         Civilization civilization = civilizationOptional.get();
-        RequestCivilization requestCivilization = requestCivilizationMapper.apply(civilization);
-        return requestCivilization;
+        CivilizationResponse civilizationResponse = civilizationResponseMapper.apply(civilization);
+        return civilizationResponse;
     }
 }

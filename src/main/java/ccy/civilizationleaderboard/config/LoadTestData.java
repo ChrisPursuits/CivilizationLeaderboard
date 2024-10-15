@@ -9,7 +9,6 @@ import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.model.Placement;
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import ccy.civilizationleaderboard.leaderboard.LeaderboardRepository;
-import ccy.civilizationleaderboard.login.service.AuthenticationServiceImpl;
 import ccy.civilizationleaderboard.user.UserRepository;
 import ccy.civilizationleaderboard.user.model.Role;
 import ccy.civilizationleaderboard.user.model.User;

@@ -5,7 +5,6 @@ import ccy.civilizationleaderboard.game.Game;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Data
 @Entity
