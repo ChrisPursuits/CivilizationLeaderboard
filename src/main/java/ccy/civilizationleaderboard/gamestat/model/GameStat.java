@@ -7,7 +7,9 @@ import lombok.*;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GameStat {
 
     @Id
@@ -47,3 +49,4 @@ public class GameStat {
         this.diplomaticPoints = diplomaticPoints;
     }
 }
+
