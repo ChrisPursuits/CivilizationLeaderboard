@@ -27,11 +27,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(AuthenticationRequest registerRequest) {
-        User userToRegister = new User(
-                registerRequest.username(),
-                passwordEncoder.encode(registerRequest.password()),
-                Role.ROLE_USER
-        );
+        User userToRegister = User.builder()
+                .username(registerRequest.username())
+                .password(passwordEncoder.encode(registerRequest.password()))
+                .role(Role.ROLE_USER)
+                .build();
+
         User registedUser = userRepository.save(userToRegister);
         return generatedAuthToken(registedUser);
     }
