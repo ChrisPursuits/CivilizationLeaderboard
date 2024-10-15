@@ -27,7 +27,7 @@ public class Game {
     private int finishingRound;
 
     @ManyToMany(mappedBy = "gameList")
-    private List<User> user;
+    private List<User> userList;
 
     @OneToMany(mappedBy = "game")
     private List<GameStat> gameStatList;
