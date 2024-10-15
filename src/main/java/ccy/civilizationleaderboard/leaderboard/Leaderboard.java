@@ -22,7 +22,12 @@ public class Leaderboard {
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "leaderboardList")
+    @ManyToMany
+    @JoinTable(
+            name = "leaderboard_users",
+            joinColumns = @JoinColumn(name = "leaderboard_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> userList;
 
     //used in LeaderboardRequestMapper to map from dto to model
