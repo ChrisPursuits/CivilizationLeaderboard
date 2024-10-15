@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsername(String username);
-    List<User> findAllByLeaderboardId(int leaderboardId);
 
     @Query("SELECT u FROM User u JOIN u.leaderboard l WHERE l.id = :leaderboardId " +
             "ORDER BY " +
