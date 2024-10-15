@@ -1,5 +1,9 @@
-package ccy.civilizationleaderboard.civilization;
+package ccy.civilizationleaderboard.civilization.service;
 
+import ccy.civilizationleaderboard.civilization.CivilizationRepository;
+import ccy.civilizationleaderboard.civilization.RequestCivilization;
+import ccy.civilizationleaderboard.civilization.RequestCivilizationMapper;
+import ccy.civilizationleaderboard.civilization.model.Civilization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

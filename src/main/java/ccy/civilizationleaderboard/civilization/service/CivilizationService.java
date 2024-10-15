@@ -1,4 +1,6 @@
-package ccy.civilizationleaderboard.civilization;
+package ccy.civilizationleaderboard.civilization.service;
+
+import ccy.civilizationleaderboard.civilization.RequestCivilization;
 
 public interface CivilizationService {
     RequestCivilization getCivilizationBy(int id);
