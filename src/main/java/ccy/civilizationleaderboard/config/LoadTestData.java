@@ -323,10 +323,10 @@ public class LoadTestData implements CommandLineRunner {
 
     private void createGameStats() {
 
-        Civilization yongle = civilizationRepository.findByCivilizationName("Yongle").get();
-        Civilization joãoIII = civilizationRepository.findByCivilizationName("João III").get();
-        Civilization victoriaAgeOfEmpire = civilizationRepository.findByCivilizationName("Victoria (Age of Empire)").get();
-        Civilization shaka = civilizationRepository.findByCivilizationName("Shaka").get();
+        Civilization yongle = civilizationRepository.findCivilizationByLeader("Yongle").get();
+        Civilization joãoIII = civilizationRepository.findCivilizationByLeader("João III").get();
+        Civilization victoriaAgeOfEmpire = civilizationRepository.findCivilizationByLeader("Victoria (Age of Empire)").get();
+        Civilization shaka = civilizationRepository.findCivilizationByLeader("Shaka").get();
 
         GameStat chirsGameStat1 = GameStat.builder()
                 .selectedCivilization(yongle)

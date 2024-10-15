@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CivilizationRepository extends JpaRepository<Civilization, Integer> {
 
-    Optional<Civilization> findByCivilizationName(String civilizationName);
+    Optional<Civilization> findCivilizationByLeader(String civilizationLeaderName);
 }

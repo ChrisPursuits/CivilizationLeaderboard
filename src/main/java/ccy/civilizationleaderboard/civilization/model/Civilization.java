@@ -20,6 +20,8 @@ public class Civilization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Enumerated(EnumType.STRING)
     private ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization;
 
     @Column(unique = true)
