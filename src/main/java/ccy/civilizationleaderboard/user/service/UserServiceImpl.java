@@ -1,10 +1,15 @@
 package ccy.civilizationleaderboard.user.service;
 
-import ccy.civilizationleaderboard.user.User;
+import ccy.civilizationleaderboard.game.Game;
+import ccy.civilizationleaderboard.gamestat.model.GameStat;
+import ccy.civilizationleaderboard.gamestat.model.Placement;
+import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,4 +30,105 @@ public class UserServiceImpl implements UserService {
         User foundUser = userOptional.get();
         return foundUser;
     }
+
+//    @Override
+//    public List<User> findAllUsersBy(int leaderboardId) {
+//        return userRepository.findAllByLeaderboardId(leaderboardId);
+//    }
+
+    @Override
+    public List<User> calculatePlayerStatistics(int leaderboardId) {
+        List<User> sortedByPlacements = userRepository.findAllUsersByLeaderboardIdSortedByPlacements(leaderboardId);
+
+        for (User user : sortedByPlacements) {
+            List<GameStat> allUserGameStats = userRepository.findAllGameStatsByUsername(user.getUsername());
+            int totalGamesPlayed = allUserGameStats.size();
+            user.setTotalGamesPlayed(totalGamesPlayed);
+
+            List<Integer> placementHistory = new ArrayList<>(12); //max 12 different placements
+            int firstPlaceCount = 0;
+            int secondPlaceCount = 0;
+            int thirdPlaceCount = 0;
+            int fourthPlaceCount = 0;
+            int fifthPlaceCount = 0;
+            int sixthPlaceCount = 0;
+            int seventhPlaceCount = 0;
+            int eighthPlaceCount = 0;
+            int ninthPlaceCount = 0;
+            int tenthPlaceCount = 0;
+            int eleventhPlaceCount = 0;
+            int twelfthPlaceCount = 0;
+
+            placementHistory.addFirst(firstPlaceCount);
+            placementHistory.add(1, secondPlaceCount);
+            placementHistory.add(2, thirdPlaceCount);
+            placementHistory.add(3, fourthPlaceCount);
+            placementHistory.add(4, fifthPlaceCount);
+            placementHistory.add(5, sixthPlaceCount);
+            placementHistory.add(6, seventhPlaceCount);
+            placementHistory.add(7, eighthPlaceCount);
+            placementHistory.add(8, ninthPlaceCount);
+            placementHistory.add(9, tenthPlaceCount);
+            placementHistory.add(10, eleventhPlaceCount);
+            placementHistory.addLast(twelfthPlaceCount);
+
+            for (GameStat stat : allUserGameStats) {
+
+                switch (stat.getPlacement()) {
+                    case FIRST -> {
+                        firstPlaceCount++;
+                        placementHistory.addFirst(firstPlaceCount);
+                    }
+                    case SECOND -> {
+                        secondPlaceCount++;
+                        placementHistory.add(1, secondPlaceCount);
+                    }
+                    case THIRD -> {
+                        firstPlaceCount++;
+                        placementHistory.add(2, thirdPlaceCount);
+                    }
+                    case FOURTH -> {
+                        fourthPlaceCount++;
+                        placementHistory.add(3, fourthPlaceCount);
+                    }
+                    case FIFTH -> {
+                        fifthPlaceCount++;
+                        placementHistory.add(4, fifthPlaceCount);
+                    }
+                    case SIXTH -> {
+                        sixthPlaceCount++;
+                        placementHistory.add(5, sixthPlaceCount);
+                    }
+                    case SEVENTH -> {
+                        seventhPlaceCount++;
+                        placementHistory.add(6, seventhPlaceCount);
+                    }
+                    case EIGHTH -> {
+                        eighthPlaceCount++;
+                        placementHistory.add(7, eighthPlaceCount);
+                    }
+                    case NINTH -> {
+                        ninthPlaceCount++;
+                        placementHistory.add(8, ninthPlaceCount);
+                    }
+                    case TENTH -> {
+                        tenthPlaceCount++;
+                        placementHistory.add(9, tenthPlaceCount);
+                    }
+                    case ELEVENTH -> {
+                        eleventhPlaceCount++;
+                        placementHistory.add(10, eleventhPlaceCount);
+                    }
+                    case TWELFTH -> {
+                        twelfthPlaceCount++;
+                        placementHistory.addLast(twelfthPlaceCount);
+                    }
+                }
+                user.setPlacementHistory(placementHistory);
+            }
+        }
+
+        return sortedByPlacements;
+    }
+
 }
