@@ -1,4 +1,4 @@
-package ccy.civilizationleaderboard.user;
+package ccy.civilizationleaderboard.user.model;
 
 import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
@@ -45,9 +45,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "leaderboard_id")
     private Leaderboard leaderboard;
 
-    @OneToMany
-    @JoinColumn(name = "game_id")
-    private List<Game> game;
+    @OneToMany(mappedBy = "user")
+    private List<Game> gameList;
 
 
     //used in AuthenticationServiceImpl for registering new users
