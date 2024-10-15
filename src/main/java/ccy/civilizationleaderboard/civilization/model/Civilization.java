@@ -20,9 +20,16 @@ public class Civilization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private ccy.civilizationleaderboard.civilization.model.enums.Civilization name;//TODO perhaps make this to enum, for when adding played civilization history to User?
+    private ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization;//TODO perhaps make this to enum, for when adding played civilization history to User?
+
+    @Column(unique = true)
     private String leader;
 
     @OneToMany(mappedBy = "selectedCivilization")
     private List<GameStat> gameStatList;
+
+    public Civilization(ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization, String leader) {
+        this.civilization = civilization;
+        this.leader = leader;
+    }
 }
