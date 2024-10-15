@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.civilization;
 
+import ccy.civilizationleaderboard.civilization.model.Civilization;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
