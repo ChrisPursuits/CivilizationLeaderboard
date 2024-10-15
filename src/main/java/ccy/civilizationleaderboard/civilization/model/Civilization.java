@@ -26,6 +26,6 @@ public class Civilization {
     @CollectionTable(name = "leaders", joinColumns = @JoinColumn(name = "civilization_id"))
     private List<String> leaderList;
 
-    @OneToMany(mappedBy = "civilization")
-    private List<GameStat> gameStatSet;
+    @ManyToMany(mappedBy = "civilizationList")
+    private List<GameStat> gameStatList;
 }
