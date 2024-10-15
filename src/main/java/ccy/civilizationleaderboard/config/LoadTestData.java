@@ -287,8 +287,8 @@ public class LoadTestData implements CommandLineRunner {
 
 
     private void createGames() {
-        Game game1 = new Game("Game 1", "This is a test game");
-        Game game2 = new Game("Game 2", "This is a test game");
+        Game game1 = new Game("Game 1", "This is a test game", 150);
+        Game game2 = new Game("Game 2", "This is a test game", 87);
 
         gameRepository.save(game1); gameRepository.save(game2);
     }

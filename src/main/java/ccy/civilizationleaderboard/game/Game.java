@@ -39,4 +39,12 @@ public class Game {
         this.description = description;
         this.gameStatList = new ArrayList<>();
     }
+
+    //used for inserting test data into db
+    public Game(String title, String description, int finishingRound) {
+        this.title = title;
+        this.description = description;
+        this.finishingRound = finishingRound;
+        this.gameStatList = new ArrayList<>();
+    }
 }
