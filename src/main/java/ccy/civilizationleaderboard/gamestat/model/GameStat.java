@@ -34,13 +34,9 @@ public class GameStat {
     @JoinColumn(name = "game_id")
     private Game game;
 
-    @ManyToMany
-    @JoinTable(
-            name = "gamestat_civilization",
-            joinColumns = @JoinColumn(name = "gamestat_id"),
-            inverseJoinColumns = @JoinColumn(name = "civilization_id")
-    )
-    private List<Civilization> civilizationList;
+    @ManyToOne
+    @JoinColumn(name = "civilization_id")
+    private Civilization selectedCivilization;
 
 
     //used in GameStatRequestMapper

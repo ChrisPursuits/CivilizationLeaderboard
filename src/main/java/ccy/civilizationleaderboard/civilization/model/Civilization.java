@@ -21,11 +21,8 @@ public class Civilization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private ccy.civilizationleaderboard.civilization.model.enums.Civilization name;//TODO perhaps make this to enum, for when adding played civilization history to User?
+    private String leader;
 
-    @ElementCollection
-    @CollectionTable(name = "leaders", joinColumns = @JoinColumn(name = "civilization_id"))
-    private List<String> leaderList;
-
-    @ManyToMany(mappedBy = "civilizationList")
+    @OneToMany(mappedBy = "selectedCivilization")
     private List<GameStat> gameStatList;
 }
