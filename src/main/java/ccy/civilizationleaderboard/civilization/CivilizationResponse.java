@@ -1,6 +1,6 @@
 package ccy.civilizationleaderboard.civilization;
 
-public record RequestCivilization(
+public record CivilizationResponse(
         String name
 ) {
 }

@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 @Component
-public class RequestCivilizationMapper implements Function<Civilization, RequestCivilization> {
+public class CivilizationResponseMapper implements Function<Civilization, CivilizationResponse> {
 
     @Override
-    public RequestCivilization apply(Civilization civilization) {
-        return new RequestCivilization(
-                civilization.getName()
+    public CivilizationResponse apply(Civilization civilization) {
+        return new CivilizationResponse(
+                civilization.getLeader()
         );
     }
 }
