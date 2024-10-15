@@ -41,6 +41,10 @@ public class User implements UserDetails {
     @Column(name = "placement")
     private List<Integer> placementHistory;
 
+    //TODO
+    //create a playedCivilizationTracker/history using a HashMap.
+
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "leaderboard_id")
     private Leaderboard leaderboard;

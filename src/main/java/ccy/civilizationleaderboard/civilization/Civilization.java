@@ -20,7 +20,7 @@ public class Civilization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String name; //TODO perhaps make this to enum, for when adding played civilization history to User?
 
     @OneToMany(mappedBy = "civilization")
     private List<GameStat> gameStatSet;
