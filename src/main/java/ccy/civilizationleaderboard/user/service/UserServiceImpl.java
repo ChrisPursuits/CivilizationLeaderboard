@@ -34,12 +34,15 @@ public class UserServiceImpl implements UserService {
         return foundUser;
     }
 
-
-    public UserResponse updateUserPlacementHistory(GameStat gameStat) {
+    @Override
+    public void updateUserPlacementHistory(GameStat gameStat) {
         User user = gameStat.getUser();
         List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
 
+        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
+        user.setPlacementHistory(placementHistory);
 
+        userRepository.save(user);
     }
 
 
