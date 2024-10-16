@@ -48,7 +48,7 @@ public class User implements UserDetails {
 
 
     //since the idea is that every civ 6 player should be able to create a leaderboard with their frinds the User owns the relationship
-    @ManyToMany(mappedBy = "userList")
+    @ManyToMany(mappedBy = "leaderboardMembers")
     private List<Leaderboard> leaderboardList;
 
     @ManyToMany

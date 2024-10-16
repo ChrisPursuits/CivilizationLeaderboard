@@ -29,12 +29,12 @@ public class Leaderboard {
             joinColumns = @JoinColumn(name = "leaderboard_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> userList;
+    private List<User> leaderboardMembers;
 
     //used in LeaderboardRequestMapper to map from dto to model
     public Leaderboard(String name, String description) {
         this.name = name;
         this.description = description;
-        this.userList = new ArrayList<>();
+        this.leaderboardMembers = new ArrayList<>();
     }
 }
