@@ -46,7 +46,9 @@ public class GameStat {
 
 
     //used in GameStatRequestMapper
-    public GameStat(Placement placement, int victoryPoints, int militaryPoints, int sciencePoints, int culturePoints, int gold, int religiousPoints, int diplomaticPoints) {
+    public GameStat(User user, Civilization civilization, Placement placement, int victoryPoints, int militaryPoints, int sciencePoints, int culturePoints, int gold, int religiousPoints, int diplomaticPoints) {
+        this.user = user;
+        this.selectedCivilization = civilization;
         this.placement = placement;
         this.victoryPoints = victoryPoints;
         this.militaryPoints = militaryPoints;
