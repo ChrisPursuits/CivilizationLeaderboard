@@ -5,6 +5,7 @@ import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardResponse;
 import ccy.civilizationleaderboard.leaderboard.service.LeaderboardService;
 import ccy.civilizationleaderboard.requestvalidator.EntityType;
 import ccy.civilizationleaderboard.requestvalidator.RequestValidator;
+import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
+    private final UserService userService;
     private final RequestValidator requestValidator;
 
 
@@ -49,6 +51,25 @@ public class LeaderboardController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/leaderboard/{leaderboardId}")
+    public ResponseEntity<LeaderboardResponse> addUserToLeaderboard(@PathVariable int leaderboardId,
+                                                                    @RequestParam int userId) {
+
+        ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.LEADERBOARD, leaderboardId);
+        if (validationResponse != null) {
+            return ResponseEntity
+                    .status(validationResponse.getStatusCode())
+                    .build();
+        }
+
+        boolean doesExist = userService.doesExist(userId);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        LeaderboardResponse response = leaderboardService.addUserToLeaderboard(leaderboardId, userId);
+        return ResponseEntity.ok(response);
+    }
 
 
     @PutMapping("/leaderboard/{id}")
