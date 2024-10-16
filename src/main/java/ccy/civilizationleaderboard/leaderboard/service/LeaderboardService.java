@@ -12,4 +12,5 @@ public interface LeaderboardService {
 
     boolean doesExist(int id);
     boolean doesExist(LeaderboardRequest postRequest);
+    LeaderboardResponse addUserToLeaderboard(int leaderboardId, int userId);
 }
