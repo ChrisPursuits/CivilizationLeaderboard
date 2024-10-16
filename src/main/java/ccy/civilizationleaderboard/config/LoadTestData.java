@@ -305,7 +305,15 @@ public class LoadTestData implements CommandLineRunner {
         Optional<Leaderboard> leaderboardOptional = leaderboardRepository.findById(1);
         Leaderboard leaderboard = leaderboardOptional.get();
 
-        leaderboard.getUserList().addAll(userRepository.findAll());
+
+        //when you want to update a row in the database, you do not have to save the object after setting the relation.
+        //hibernate/jpa automaticly does this, when you use .set()...
+        //an example of this down below:
+
+//        List<User> userList = userRepository.findAll();
+//        leaderboard.setLeaderboardMembers(userList);
+
+        leaderboard.getLeaderboardMembers().addAll(userRepository.findAll());
     }
 
 
