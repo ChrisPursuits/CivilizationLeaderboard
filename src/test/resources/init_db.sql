@@ -37,6 +37,7 @@ CREATE TABLE game
 CREATE TABLE game_stat
 (
     id                       INT AUTO_INCREMENT PRIMARY KEY,
+    user_id                  INT         NOT NULL,
     selected_civilization_id INT         NOT NULL,
     placement                VARCHAR(25) NOT NULL,
     victory_points           INT         NOT NULL,
@@ -48,7 +49,8 @@ CREATE TABLE game_stat
     diplomatic_points        INT         NOT NULL,
     game_id                  INT         NOT NULL,
     FOREIGN KEY (game_id) REFERENCES Game (id) ON DELETE CASCADE,
-    FOREIGN KEY (selected_civilization_id) REFERENCES Civilization (id) ON DELETE CASCADE
+    FOREIGN KEY (selected_civilization_id) REFERENCES Civilization (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) references app_user (id) ON DELETE CASCADE
 );
 
 -- User Table
@@ -188,19 +190,19 @@ VALUES ('Game 1', 'This is just a test game', 150),
 
 
 -- First GameStats
-INSERT INTO game_stat (selected_civilization_id, placement, victory_points, military_points, science_points,
+INSERT INTO game_stat (user_id, selected_civilization_id, placement, victory_points, military_points, science_points,
                        culture_points, gold, religious_points, diplomatic_points, game_id)
-VALUES ((SELECT id FROM civilization WHERE leader = 'Yongle'), 'FIRST', 500, 500, 500, 500, 500, 500, 500, 1),
-       ((SELECT id FROM civilization WHERE leader = 'João III'), 'SECOND', 300, 300, 300, 300, 300, 300, 300, 1),
-       ((SELECT id FROM civilization WHERE leader = 'Victoria (Age of Empire)'), 'THIRD', 200, 200, 200, 200, 200, 200,
+VALUES (1, (SELECT id FROM civilization WHERE leader = 'Yongle'), 'FIRST', 500, 500, 500, 500, 500, 500, 500, 1),
+       (2, (SELECT id FROM civilization WHERE leader = 'João III'), 'SECOND', 300, 300, 300, 300, 300, 300, 300, 1),
+       (3, (SELECT id FROM civilization WHERE leader = 'Victoria (Age of Empire)'), 'THIRD', 200, 200, 200, 200, 200, 200,
         200, 1),
-       ((SELECT id FROM civilization WHERE leader = 'Shaka'), 'FOURTH', 100, 100, 100, 100, 100, 100, 100, 1);
+       (4, (SELECT id FROM civilization WHERE leader = 'Shaka'), 'FOURTH', 100, 100, 100, 100, 100, 100, 100, 1);
 
 -- Second GameStats
-INSERT INTO game_stat (selected_civilization_id, placement, victory_points, military_points, science_points,
+INSERT INTO game_stat (user_id, selected_civilization_id, placement, victory_points, military_points, science_points,
                        culture_points, gold, religious_points, diplomatic_points, game_id)
-VALUES ((SELECT id FROM civilization WHERE leader = 'Yongle'), 'FIRST', 500, 500, 500, 500, 500, 500, 500, 2),
-       ((SELECT id FROM civilization WHERE leader = 'João III'), 'SECOND', 300, 300, 300, 300, 300, 300, 300, 2),
-       ((SELECT id FROM civilization WHERE leader = 'Victoria (Age of Empire)'), 'THIRD', 200, 200, 200, 200, 200, 200,
+VALUES (1, (SELECT id FROM civilization WHERE leader = 'Yongle'), 'FIRST', 500, 500, 500, 500, 500, 500, 500, 2),
+       (2, (SELECT id FROM civilization WHERE leader = 'João III'), 'SECOND', 300, 300, 300, 300, 300, 300, 300, 2),
+       (3, (SELECT id FROM civilization WHERE leader = 'Victoria (Age of Empire)'), 'THIRD', 200, 200, 200, 200, 200, 200,
         200, 2),
-       ((SELECT id FROM civilization WHERE leader = 'Shaka'), 'FOURTH', 100, 100, 100, 100, 100, 100, 100, 2);
+       (4, (SELECT id FROM civilization WHERE leader = 'Shaka'), 'FOURTH', 100, 100, 100, 100, 100, 100, 100, 2);
