@@ -11,6 +11,7 @@ public class UserResponseMapper implements Function<User, UserResponse> {
     @Override
     public UserResponse apply(User user) {
         return new UserResponse(
+                user.getId(),
                 user.getUsername(),
                 user.getTotalGamesPlayed(),
                 user.getPlacementHistory()
