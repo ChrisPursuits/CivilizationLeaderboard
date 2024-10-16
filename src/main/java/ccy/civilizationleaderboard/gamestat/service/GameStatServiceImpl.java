@@ -6,6 +6,7 @@ import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatRequestMapper;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatResponseMapper;
+import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class GameStatServiceImpl implements GameStatService {
     private final GameStatResponseMapper gameStatResponseMapper;
     private final GameStatRequestMapper gameStatRequestMapper;
     private final GameStatRepository gameStatRepository;
+    private final UserService userService;
 
 
     @Override
@@ -51,6 +53,8 @@ public class GameStatServiceImpl implements GameStatService {
         GameStat gameStat = gameStatRequestMapper.apply(postRequest);
         GameStat savedGameStat = gameStatRepository.save(gameStat);
 
+        userService.updateUserPlacementHistory(gameStat);
+
         return gameStatResponseMapper.apply(savedGameStat);
     }
 
@@ -73,7 +77,7 @@ public class GameStatServiceImpl implements GameStatService {
     }
 
 
-
+    //TODO consider adding selectedCivilization and user as parameter in this method
     @Override
     public boolean doesExist(GameStatRequest postRequest) {
         return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
