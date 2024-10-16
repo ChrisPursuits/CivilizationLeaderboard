@@ -2,8 +2,10 @@ package ccy.civilizationleaderboard.gamestat;
 
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.model.Placement;
+import ccy.civilizationleaderboard.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Set;
 
 public interface GameStatRepository extends JpaRepository<GameStat, Integer> {
@@ -20,4 +22,6 @@ public interface GameStatRepository extends JpaRepository<GameStat, Integer> {
             int gold,
             int religiousPoints,
             int diplomaticPoints);
+
+    List<GameStat> findAllByUser(User user);
 }

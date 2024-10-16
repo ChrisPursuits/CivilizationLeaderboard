@@ -26,12 +26,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "(SELECT COUNT(ph) FROM u.placementHistory ph WHERE ph = 11) DESC, " +
             "(SELECT COUNT(ph) FROM u.placementHistory ph WHERE ph = 12) DESC")
     List<User> findAllUsersByLeaderboardIdSortedByPlacements(int leaderboardId);
-
-
-    @Query("SELECT gs FROM GameStat gs " +
-            "JOIN gs.game g " +
-            "JOIN g.userList u " +
-            "WHERE u.username = :username")
-    List<GameStat> findAllGameStatsByUsername(String username);
-
 }
