@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.user.service;
 
+import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.UserResponse;
 import ccy.civilizationleaderboard.user.UserResponseMapper;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final GameStatRepository gameStatRepository;
     private final UserRepository userRepository;
     private final UserResponseMapper userResponseMapper;
 
@@ -33,6 +35,14 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    public UserResponse updateUserPlacementHistory(GameStat gameStat) {
+        User user = gameStat.getUser();
+        List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
+
+
+    }
+
+
     @Override
     public List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId) {
         List<User> sortedByPlacements = userRepository.findAllUsersByLeaderboardIdSortedByPlacements(leaderboardId);
@@ -40,15 +50,12 @@ public class UserServiceImpl implements UserService {
         for (User user : sortedByPlacements) {
 
             //gets all the gameStat on user, and sets total games played.
-            List<GameStat> allUserGameStats = userRepository.findAllGameStatsByUsername(user.getUsername());
+            List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
             int totalGamesPlayed = allUserGameStats.size();
             user.setTotalGamesPlayed(totalGamesPlayed);
 
             //calculate placementHistory
-            List<Integer> placementHistory = new ArrayList<>(12); //max 12 placements
-            calculatePlacementHistory(placementHistory, allUserGameStats);
-            //since placementHistory has been assigned a location in memory
-            //when I add elements to the list it do not need to return the list again. (hopefully this makes sence future me)
+            List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
             user.setPlacementHistory(placementHistory);
         }
 
@@ -62,7 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private void calculatePlacementHistory(List<Integer> placementHistory, List<GameStat> allUserGameStats) {
+    private List<Integer> calculatePlacementHistory(List<GameStat> allUserGameStats) {
+        List<Integer> placementHistory = new ArrayList<>(12); //max 12 placements
+
         int firstPlaceCount = 0;
         int secondPlaceCount = 0;
         int thirdPlaceCount = 0;
@@ -142,5 +151,6 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+        return placementHistory;
     }
 }
