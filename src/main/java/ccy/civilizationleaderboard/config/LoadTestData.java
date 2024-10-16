@@ -35,7 +35,6 @@ public class LoadTestData implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
 
-
     @Override
     public void run(String... args) throws Exception {
         createCivilizations();
@@ -45,10 +44,8 @@ public class LoadTestData implements CommandLineRunner {
         createGames();
         createConnectionBetweenUserAndGame();
         createGameStats();
-
         createConnectionBetweenGameAndGameStat();
     }
-
 
 
     private void createCivilizations() {
@@ -181,49 +178,76 @@ public class LoadTestData implements CommandLineRunner {
         Civilization zuluCiv1 = new Civilization(ccy.civilizationleaderboard.civilization.model.enums.Civilization.ZULU, "Shaka");
 
 
-
-        civilizationRepository.save(americanCiv1); civilizationRepository.save(americanCiv2); civilizationRepository.save(americanCiv3); civilizationRepository.save(americanCiv4);
-        civilizationRepository.save(arabianCiv1); civilizationRepository.save(arabianCiv2);
+        civilizationRepository.save(americanCiv1);
+        civilizationRepository.save(americanCiv2);
+        civilizationRepository.save(americanCiv3);
+        civilizationRepository.save(americanCiv4);
+        civilizationRepository.save(arabianCiv1);
+        civilizationRepository.save(arabianCiv2);
         civilizationRepository.save(australianCiv1);
         civilizationRepository.save(aztecCiv1);
         civilizationRepository.save(babylonianCiv1);
         civilizationRepository.save(brazilianCiv1);
-        civilizationRepository.save(byzantineCiv1); civilizationRepository.save(byzantineCiv2);
+        civilizationRepository.save(byzantineCiv1);
+        civilizationRepository.save(byzantineCiv2);
         civilizationRepository.save(canadianCiv1);
-        civilizationRepository.save(chineseCiv1); civilizationRepository.save(chineseCiv2); civilizationRepository.save(chineseCiv3); civilizationRepository.save(chineseCiv4); civilizationRepository.save(chineseCiv5);
+        civilizationRepository.save(chineseCiv1);
+        civilizationRepository.save(chineseCiv2);
+        civilizationRepository.save(chineseCiv3);
+        civilizationRepository.save(chineseCiv4);
+        civilizationRepository.save(chineseCiv5);
         civilizationRepository.save(creeCiv1);
         civilizationRepository.save(dutchCiv1);
-        civilizationRepository.save(egyptianCiv1); civilizationRepository.save(egyptianCiv2); civilizationRepository.save(egyptianCiv3);
-        civilizationRepository.save(englishCiv1); civilizationRepository.save(englishCiv2); civilizationRepository.save(englishCiv3); civilizationRepository.save(englishCiv4);
+        civilizationRepository.save(egyptianCiv1);
+        civilizationRepository.save(egyptianCiv2);
+        civilizationRepository.save(egyptianCiv3);
+        civilizationRepository.save(englishCiv1);
+        civilizationRepository.save(englishCiv2);
+        civilizationRepository.save(englishCiv3);
+        civilizationRepository.save(englishCiv4);
         civilizationRepository.save(ethiopianCiv1);
-        civilizationRepository.save(frenchCiv1); civilizationRepository.save(frenchCiv2); civilizationRepository.save(frenchCiv3);
+        civilizationRepository.save(frenchCiv1);
+        civilizationRepository.save(frenchCiv2);
+        civilizationRepository.save(frenchCiv3);
         civilizationRepository.save(gallicCiv1);
         civilizationRepository.save(georgianCiv1);
-        civilizationRepository.save(germanCiv1); civilizationRepository.save(germanCiv2);
+        civilizationRepository.save(germanCiv1);
+        civilizationRepository.save(germanCiv2);
         civilizationRepository.save(granColombianCiv1);
-        civilizationRepository.save(greekCiv1); civilizationRepository.save(greekCiv2);
+        civilizationRepository.save(greekCiv1);
+        civilizationRepository.save(greekCiv2);
         civilizationRepository.save(hungarianCiv1);
         civilizationRepository.save(incanCiv1);
-        civilizationRepository.save(indianCiv1); civilizationRepository.save(indianCiv2);
+        civilizationRepository.save(indianCiv1);
+        civilizationRepository.save(indianCiv2);
         civilizationRepository.save(indonesianCiv1);
-        civilizationRepository.save(japaneseCiv1); civilizationRepository.save(japaneseCiv2);
+        civilizationRepository.save(japaneseCiv1);
+        civilizationRepository.save(japaneseCiv2);
         civilizationRepository.save(khmerCiv1);
-        civilizationRepository.save(kongoleseCiv1); civilizationRepository.save(kongoleseCiv2);
-        civilizationRepository.save(koreanCiv1); civilizationRepository.save(koreanCiv2);
+        civilizationRepository.save(kongoleseCiv1);
+        civilizationRepository.save(kongoleseCiv2);
+        civilizationRepository.save(koreanCiv1);
+        civilizationRepository.save(koreanCiv2);
         civilizationRepository.save(macedonianCiv1);
-        civilizationRepository.save(malianCiv1); civilizationRepository.save(malianCiv2);
+        civilizationRepository.save(malianCiv1);
+        civilizationRepository.save(malianCiv2);
         civilizationRepository.save(mãoriCiv1);
         civilizationRepository.save(mapucheCiv1);
         civilizationRepository.save(mayanCiv1);
-        civilizationRepository.save(mongolianCiv1); civilizationRepository.save(mongolianCiv2);
-        civilizationRepository.save(norwegianCiv1); civilizationRepository.save(norwegianCiv2);
+        civilizationRepository.save(mongolianCiv1);
+        civilizationRepository.save(mongolianCiv2);
+        civilizationRepository.save(norwegianCiv1);
+        civilizationRepository.save(norwegianCiv2);
         civilizationRepository.save(nubianCiv1);
-        civilizationRepository.save(ottomanCiv1); civilizationRepository.save(ottomanCiv2);
-        civilizationRepository.save(persianCiv1); civilizationRepository.save(persianCiv2);
+        civilizationRepository.save(ottomanCiv1);
+        civilizationRepository.save(ottomanCiv2);
+        civilizationRepository.save(persianCiv1);
+        civilizationRepository.save(persianCiv2);
         civilizationRepository.save(phoenicianCiv1);
         civilizationRepository.save(polishCiv1);
         civilizationRepository.save(portuguese);
-        civilizationRepository.save(romanCiv1); civilizationRepository.save(romanCiv2);
+        civilizationRepository.save(romanCiv1);
+        civilizationRepository.save(romanCiv2);
         civilizationRepository.save(russianCiv1);
         civilizationRepository.save(scottishCiv1);
         civilizationRepository.save(scythianCiv1);
@@ -235,12 +259,10 @@ public class LoadTestData implements CommandLineRunner {
     }
 
 
-
     private void createLeaderboard() {
         Leaderboard leaderboard = new Leaderboard("First Leaderboard", "This is a test leaderboard");
         leaderboardRepository.save(leaderboard);
     }
-
 
 
     private void createUsers() {
@@ -272,9 +294,11 @@ public class LoadTestData implements CommandLineRunner {
                 .gameList(new ArrayList<>())
                 .build();
 
-        userRepository.save(chris); userRepository.save(markus); userRepository.save(engjëll); userRepository.save(mikkel);
+        userRepository.save(chris);
+        userRepository.save(markus);
+        userRepository.save(engjëll);
+        userRepository.save(mikkel);
     }
-
 
 
     private void createConnectionBetweenLeaderboardAndUser() {
@@ -285,14 +309,13 @@ public class LoadTestData implements CommandLineRunner {
     }
 
 
-
     private void createGames() {
         Game game1 = new Game("Game 1", "This is a test game", 150);
         Game game2 = new Game("Game 2", "This is a test game", 87);
 
-        gameRepository.save(game1); gameRepository.save(game2);
+        gameRepository.save(game1);
+        gameRepository.save(game2);
     }
-
 
 
     private void createConnectionBetweenUserAndGame() {
@@ -313,19 +336,29 @@ public class LoadTestData implements CommandLineRunner {
         engjëll.getGameList().addLast(game1.get());
         mikkel.getGameList().addLast(game1.get());
 
-        userRepository.save(chris); userRepository.save(markus); userRepository.save(engjëll); userRepository.save(mikkel);
+        userRepository.save(chris);
+        userRepository.save(markus);
+        userRepository.save(engjëll);
+        userRepository.save(mikkel);
 
         chris.getGameList().addLast(game2.get());
         markus.getGameList().addLast(game2.get());
         engjëll.getGameList().addLast(game2.get());
         mikkel.getGameList().addLast(game2.get());
 
-        userRepository.save(chris); userRepository.save(markus); userRepository.save(engjëll); userRepository.save(mikkel);
+        userRepository.save(chris);
+        userRepository.save(markus);
+        userRepository.save(engjëll);
+        userRepository.save(mikkel);
     }
 
 
-
     private void createGameStats() {
+
+        User chris = userRepository.findById(1).get();
+        User markus = userRepository.findById(2).get();
+        User engjëll = userRepository.findById(3).get();
+        User mikkel = userRepository.findById(4).get();
 
         Civilization yongle = civilizationRepository.findCivilizationByLeader("Yongle").get();
         Civilization joãoIII = civilizationRepository.findCivilizationByLeader("João III").get();
@@ -333,6 +366,7 @@ public class LoadTestData implements CommandLineRunner {
         Civilization shaka = civilizationRepository.findCivilizationByLeader("Shaka").get();
 
         GameStat chirsGameStat1 = GameStat.builder()
+                .user(chris)
                 .selectedCivilization(yongle)
                 .placement(Placement.FIRST)
                 .victoryPoints(500)
@@ -345,6 +379,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat markusGameStat1 = GameStat.builder()
+                .user(markus)
                 .selectedCivilization(joãoIII)
                 .placement(Placement.SECOND)
                 .victoryPoints(300)
@@ -357,6 +392,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat engjëllGameStat1 = GameStat.builder()
+                .user(engjëll)
                 .selectedCivilization(victoriaAgeOfEmpire)
                 .placement(Placement.THIRD)
                 .victoryPoints(200)
@@ -369,6 +405,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat mikkelGameStat1 = GameStat.builder()
+                .user(mikkel)
                 .selectedCivilization(shaka)
                 .placement(Placement.FOURTH)
                 .victoryPoints(100)
@@ -380,10 +417,14 @@ public class LoadTestData implements CommandLineRunner {
                 .diplomaticPoints(100)
                 .build();
 
-        gameStatRepository.save(chirsGameStat1); gameStatRepository.save(markusGameStat1); gameStatRepository.save(engjëllGameStat1); gameStatRepository.save(mikkelGameStat1);
+        gameStatRepository.save(chirsGameStat1);
+        gameStatRepository.save(markusGameStat1);
+        gameStatRepository.save(engjëllGameStat1);
+        gameStatRepository.save(mikkelGameStat1);
 
 
         GameStat chirsGameStat2 = GameStat.builder()
+                .user(chris)
                 .selectedCivilization(yongle)
                 .placement(Placement.FIRST)
                 .victoryPoints(500)
@@ -396,6 +437,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat markusGameStat2 = GameStat.builder()
+                .user(markus)
                 .selectedCivilization(joãoIII)
                 .placement(Placement.SECOND)
                 .victoryPoints(300)
@@ -408,6 +450,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat engjëllGameStat2 = GameStat.builder()
+                .user(engjëll)
                 .selectedCivilization(victoriaAgeOfEmpire)
                 .placement(Placement.THIRD)
                 .victoryPoints(200)
@@ -420,6 +463,7 @@ public class LoadTestData implements CommandLineRunner {
                 .build();
 
         GameStat mikkelGameStat2 = GameStat.builder()
+                .user(mikkel)
                 .selectedCivilization(shaka)
                 .placement(Placement.FOURTH)
                 .victoryPoints(100)
@@ -431,37 +475,28 @@ public class LoadTestData implements CommandLineRunner {
                 .diplomaticPoints(100)
                 .build();
 
-        gameStatRepository.save(chirsGameStat2); gameStatRepository.save(markusGameStat2); gameStatRepository.save(engjëllGameStat2); gameStatRepository.save(mikkelGameStat2);
+        gameStatRepository.save(chirsGameStat2);
+        gameStatRepository.save(markusGameStat2);
+        gameStatRepository.save(engjëllGameStat2);
+        gameStatRepository.save(mikkelGameStat2);
     }
-
 
 
     private void createConnectionBetweenGameAndGameStat() {
-        Optional<Game> gameOptional1 = gameRepository.findById(1);
-        Optional<Game> gameOptional2 = gameRepository.findById(2);
-        Game game1 = gameOptional1.get();
-        Game game2 = gameOptional2.get();
+        Game game1 = gameRepository.findById(1).get();
+        Game game2 = gameRepository.findById(2).get();
 
-        List<GameStat> gameStatsForGame1 = new ArrayList<>(List.of(
-                gameStatRepository.findById(1).get(),
-                gameStatRepository.findById(2).get(),
-                gameStatRepository.findById(3).get(),
-                gameStatRepository.findById(4).get())
-        );
-        List<GameStat> gameStatsForGame2 = new ArrayList<>(List.of(
-                gameStatRepository.findById(5).get(),
-                gameStatRepository.findById(6).get(),
-                gameStatRepository.findById(7).get(),
-                gameStatRepository.findById(8).get())
-        );
 
-        game1.getGameStatList().addAll(gameStatsForGame1);
-        game2.getGameStatList().addAll(gameStatsForGame2);
+        gameStatRepository.findById(1).get().setGame(game1);
+        gameStatRepository.findById(2).get().setGame(game1);
+        gameStatRepository.findById(3).get().setGame(game1);
+        gameStatRepository.findById(4).get().setGame(game1);
 
-        gameRepository.save(game1);
-        gameRepository.save(game2);
+        gameStatRepository.findById(5).get().setGame(game2);
+        gameStatRepository.findById(6).get().setGame(game2);
+        gameStatRepository.findById(7).get().setGame(game2);
+        gameStatRepository.findById(8).get().setGame(game2);
+
+
     }
-
-
-
 }
