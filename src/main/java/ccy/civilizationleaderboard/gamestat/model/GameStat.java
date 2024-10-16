@@ -2,6 +2,7 @@ package ccy.civilizationleaderboard.gamestat.model;
 
 import ccy.civilizationleaderboard.civilization.model.Civilization;
 import ccy.civilizationleaderboard.game.Game;
+import ccy.civilizationleaderboard.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,18 @@ public class GameStat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id")
+    private Game game;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "civilization_id")
+    private Civilization selectedCivilization;
+
     @Enumerated(EnumType.STRING)
     private Placement placement;
 
@@ -29,13 +42,7 @@ public class GameStat {
     private int diplomaticPoints;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "game_id")
-    private Game game;
 
-    @ManyToOne
-    @JoinColumn(name = "civilization_id")
-    private Civilization selectedCivilization;
 
 
     //used in GameStatRequestMapper

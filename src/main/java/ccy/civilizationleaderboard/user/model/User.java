@@ -1,6 +1,7 @@
 package ccy.civilizationleaderboard.user.model;
 
 import ccy.civilizationleaderboard.game.Game;
+import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "game_id")
     )
     private List<Game> gameList;
+
+    @OneToMany(mappedBy = "user")
+    private List<GameStat> gameStatList;
 
 
     //used in AuthenticationServiceImpl for registering new users
