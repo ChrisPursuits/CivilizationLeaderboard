@@ -42,6 +42,9 @@ public class UserServiceImpl implements UserService {
         List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
         user.setPlacementHistory(placementHistory);
 
+        //this line is actually redundant when I called the .setPlacementHistory() in the previous line
+        //Jpa automatically updated the db with the corresponding data.
+        // (just keeping this comment for future me.)
         userRepository.save(user);
     }
 
@@ -155,5 +158,13 @@ public class UserServiceImpl implements UserService {
             }
         }
         return placementHistory;
+    }
+
+
+
+
+    @Override
+    public boolean doesExist(int id) {
+        return userRepository.existsById(id);
     }
 }
