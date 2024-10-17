@@ -1,7 +1,6 @@
 package ccy.civilizationleaderboard.config;
 
-import ccy.civilizationleaderboard.user.UserRepository;
-import ccy.civilizationleaderboard.user.service.UserService;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

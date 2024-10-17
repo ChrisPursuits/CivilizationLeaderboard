@@ -4,11 +4,11 @@ import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.game.GameRepository;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
-import ccy.civilizationleaderboard.user.UserResponse;
-import ccy.civilizationleaderboard.user.UserResponseMapper;
+import ccy.civilizationleaderboard.user.dto.UserResponse;
+import ccy.civilizationleaderboard.user.mapper.UserResponseMapper;
 import ccy.civilizationleaderboard.user.comparator.PlacementHistoryComparator;
 import ccy.civilizationleaderboard.user.model.User;
-import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

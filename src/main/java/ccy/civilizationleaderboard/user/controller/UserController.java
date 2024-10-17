@@ -1,7 +1,8 @@
-package ccy.civilizationleaderboard.user;
+package ccy.civilizationleaderboard.user.controller;
 
 import ccy.civilizationleaderboard.requestvalidator.EntityType;
 import ccy.civilizationleaderboard.requestvalidator.RequestValidator;
+import ccy.civilizationleaderboard.user.dto.UserResponse;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;

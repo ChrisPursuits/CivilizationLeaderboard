@@ -6,14 +6,11 @@ import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardRequest;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardResponse;
 import ccy.civilizationleaderboard.leaderboard.mapper.LeaderboardRequestMapper;
 import ccy.civilizationleaderboard.leaderboard.mapper.LeaderboardResponseMapper;
-import ccy.civilizationleaderboard.user.UserRepository;
-import ccy.civilizationleaderboard.user.UserResponse;
-import ccy.civilizationleaderboard.user.UserResponseMapper;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import ccy.civilizationleaderboard.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

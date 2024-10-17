@@ -2,7 +2,7 @@ package ccy.civilizationleaderboard.repository;
 
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import ccy.civilizationleaderboard.leaderboard.LeaderboardRepository;
-import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import ccy.civilizationleaderboard.user.model.Role;
 import ccy.civilizationleaderboard.user.model.User;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@ import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.game.GameRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
-import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import ccy.civilizationleaderboard.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

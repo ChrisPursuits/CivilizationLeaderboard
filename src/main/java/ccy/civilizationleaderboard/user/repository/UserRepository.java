@@ -1,6 +1,5 @@
-package ccy.civilizationleaderboard.user;
+package ccy.civilizationleaderboard.user.repository;
 
-import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

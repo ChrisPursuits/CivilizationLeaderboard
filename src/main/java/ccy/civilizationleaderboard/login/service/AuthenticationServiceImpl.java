@@ -5,7 +5,7 @@ import ccy.civilizationleaderboard.login.dto.AuthenticationRequest;
 import ccy.civilizationleaderboard.login.dto.AuthenticationResponse;
 import ccy.civilizationleaderboard.user.model.Role;
 import ccy.civilizationleaderboard.user.model.User;
-import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

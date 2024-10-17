@@ -1,4 +1,4 @@
-package ccy.civilizationleaderboard.user;
+package ccy.civilizationleaderboard.user.dto;
 
 
 import java.util.List;

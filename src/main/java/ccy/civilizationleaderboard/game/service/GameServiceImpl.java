@@ -6,7 +6,7 @@ import ccy.civilizationleaderboard.game.dto.GameRequest;
 import ccy.civilizationleaderboard.game.dto.GameResponse;
 import ccy.civilizationleaderboard.game.mapper.GameRequestMapper;
 import ccy.civilizationleaderboard.game.mapper.GameResponseMapper;
-import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.repository.UserRepository;
 import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package ccy.civilizationleaderboard.user;
+package ccy.civilizationleaderboard.user.mapper;
 
+import ccy.civilizationleaderboard.user.dto.UserResponse;
 import ccy.civilizationleaderboard.user.model.User;
 import org.springframework.stereotype.Component;
 

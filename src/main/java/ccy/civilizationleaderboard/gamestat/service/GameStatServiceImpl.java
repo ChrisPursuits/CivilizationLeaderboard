@@ -1,14 +1,11 @@
 package ccy.civilizationleaderboard.gamestat.service;
 
-import ccy.civilizationleaderboard.civilization.CivilizationRepository;
-import ccy.civilizationleaderboard.civilization.model.Civilization;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatRequestMapper;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatResponseMapper;
-import ccy.civilizationleaderboard.user.UserRepository;
 import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
