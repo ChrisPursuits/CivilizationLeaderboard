@@ -13,4 +13,5 @@ public interface UserService {
    List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId);
    void updateUserPlacementHistory(GameStat gameStat);
    boolean doesExist(int id);
+   boolean doesExist(String username);
 }

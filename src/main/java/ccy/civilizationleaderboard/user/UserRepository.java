@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u FROM User u JOIN u.leaderboardList l WHERE l.id = :leaderboardId")
     List<User> findAllByLeaderboardId(int leaderboardId);
+
+    boolean existsByUsername(String username);
 }

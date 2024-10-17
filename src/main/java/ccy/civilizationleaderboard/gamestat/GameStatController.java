@@ -37,8 +37,8 @@ public class GameStatController {
     }
 
 
-    @GetMapping("/{gameId}")
-    public ResponseEntity<Set<GameStatResponse>> getAllGameStatsByGameId(@PathVariable Integer gameId) {
+    @GetMapping
+    public ResponseEntity<Set<GameStatResponse>> getAllGameStatsByGameId(@RequestParam Integer gameId) {
 
         ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.GAME, gameId);
         if (validationResponse != null) {
