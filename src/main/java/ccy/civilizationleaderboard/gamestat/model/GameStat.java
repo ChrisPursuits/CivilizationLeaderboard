@@ -3,15 +3,16 @@ package ccy.civilizationleaderboard.gamestat.model;
 import ccy.civilizationleaderboard.civilization.model.Civilization;
 import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.user.model.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
-@Data
-@Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class GameStat {
 
     @Id
@@ -20,14 +21,17 @@ public class GameStat {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id")
+    @JsonManagedReference
     private Game game;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "civilization_id")
+    @JsonManagedReference
     private Civilization selectedCivilization;
 
     @Enumerated(EnumType.STRING)
@@ -40,8 +44,6 @@ public class GameStat {
     private int gold;
     private int religiousPoints;
     private int diplomaticPoints;
-
-
 
 
 
