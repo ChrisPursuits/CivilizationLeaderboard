@@ -109,51 +109,51 @@ public class UserServiceImpl implements UserService {
             switch (stat.getPlacement()) {
                 case FIRST -> {
                     firstPlaceCount++;
-                    placementHistory.addFirst(firstPlaceCount);
+                    placementHistory.set(0, firstPlaceCount);
                 }
                 case SECOND -> {
                     secondPlaceCount++;
-                    placementHistory.add(1, secondPlaceCount);
+                    placementHistory.set(1, secondPlaceCount);
                 }
                 case THIRD -> {
-                    firstPlaceCount++;
-                    placementHistory.add(2, thirdPlaceCount);
+                    thirdPlaceCount++;
+                    placementHistory.set(2, thirdPlaceCount);
                 }
                 case FOURTH -> {
                     fourthPlaceCount++;
-                    placementHistory.add(3, fourthPlaceCount);
+                    placementHistory.set(3, fourthPlaceCount);
                 }
                 case FIFTH -> {
                     fifthPlaceCount++;
-                    placementHistory.add(4, fifthPlaceCount);
+                    placementHistory.set(4, fifthPlaceCount);
                 }
                 case SIXTH -> {
                     sixthPlaceCount++;
-                    placementHistory.add(5, sixthPlaceCount);
+                    placementHistory.set(5, sixthPlaceCount);
                 }
                 case SEVENTH -> {
                     seventhPlaceCount++;
-                    placementHistory.add(6, seventhPlaceCount);
+                    placementHistory.set(6, seventhPlaceCount);
                 }
                 case EIGHTH -> {
                     eighthPlaceCount++;
-                    placementHistory.add(7, eighthPlaceCount);
+                    placementHistory.set(7, eighthPlaceCount);
                 }
                 case NINTH -> {
                     ninthPlaceCount++;
-                    placementHistory.add(8, ninthPlaceCount);
+                    placementHistory.set(8, ninthPlaceCount);
                 }
                 case TENTH -> {
                     tenthPlaceCount++;
-                    placementHistory.add(9, tenthPlaceCount);
+                    placementHistory.set(9, tenthPlaceCount);
                 }
                 case ELEVENTH -> {
                     eleventhPlaceCount++;
-                    placementHistory.add(10, eleventhPlaceCount);
+                    placementHistory.set(10, eleventhPlaceCount);
                 }
                 case TWELFTH -> {
                     twelfthPlaceCount++;
-                    placementHistory.addLast(twelfthPlaceCount);
+                    placementHistory.set(11, twelfthPlaceCount);
                 }
             }
         }
