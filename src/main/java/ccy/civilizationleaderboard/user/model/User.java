@@ -3,6 +3,8 @@ package ccy.civilizationleaderboard.user.model;
 import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,6 +51,7 @@ public class User implements UserDetails {
 
     //since the idea is that every civ 6 player should be able to create a leaderboard with their frinds the User owns the relationship
     @ManyToMany(mappedBy = "leaderboardMembers")
+    @JsonBackReference
     private List<Leaderboard> leaderboardList;
 
     @ManyToMany
@@ -57,9 +60,11 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id")
     )
+    @JsonManagedReference
     private List<Game> gameList;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<GameStat> gameStatList;
 
 
