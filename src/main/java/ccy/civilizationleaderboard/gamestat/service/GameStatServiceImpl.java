@@ -6,6 +6,8 @@ import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatResponse;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatRequestMapper;
 import ccy.civilizationleaderboard.gamestat.mapper.GameStatResponseMapper;
+import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class GameStatServiceImpl implements GameStatService {
     private final GameStatResponseMapper gameStatResponseMapper;
     private final GameStatRequestMapper gameStatRequestMapper;
     private final GameStatRepository gameStatRepository;
+    private final UserRepository userRepository;
     private final UserService userService;
 
 
@@ -77,10 +80,20 @@ public class GameStatServiceImpl implements GameStatService {
     }
 
 
-    //TODO consider adding selectedCivilization and user as parameter in this method
+    //TODO consider only checking for 4 parameters as the chances for these 4 to be exactly the same should be relativly low over thounds of games?
     @Override
     public boolean doesExist(GameStatRequest postRequest) {
-        return gameStatRepository.existsByPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+
+        Optional<User> userOptional = userRepository.findById(postRequest.user().getId());
+        if (userOptional.isEmpty()) {
+            return true; //This will cause controller to respond with BadRequest.
+        }
+
+        User user = userOptional.get();
+
+        return gameStatRepository.existsByUserAndSelectedCivilizationAndPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+                user,
+                postRequest.selectedCivilization(),
                 postRequest.placement(),
                 postRequest.victoryPoints(),
                 postRequest.militaryPoints(),
