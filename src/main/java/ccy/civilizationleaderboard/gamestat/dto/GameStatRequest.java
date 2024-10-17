@@ -5,8 +5,9 @@ import ccy.civilizationleaderboard.gamestat.model.Placement;
 import ccy.civilizationleaderboard.user.model.User;
 
 public record GameStatRequest(
-        User user,
-        Civilization selectedCivilization,
+        int gameId,
+        int userId,
+        int civilizationId,
         Placement placement,
         int victoryPoints,
         int militaryPoints,

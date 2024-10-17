@@ -1,7 +1,13 @@
 package ccy.civilizationleaderboard.gamestat.mapper;
 
+import ccy.civilizationleaderboard.civilization.CivilizationRepository;
+import ccy.civilizationleaderboard.civilization.model.Civilization;
+import ccy.civilizationleaderboard.game.Game;
+import ccy.civilizationleaderboard.game.GameRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
+import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +17,21 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class GameStatRequestMapper implements Function<GameStatRequest, GameStat> {
 
+    private final UserRepository userRepository;
+    private final GameRepository gameRepository;
+    private final CivilizationRepository civilizationRepository;
+
     @Override
     public GameStat apply(GameStatRequest gameStatRequest) {
 
+        User user = userRepository.findById(gameStatRequest.userId()).orElse(null);
+        Game game = gameRepository.findById(gameStatRequest.gameId()).orElse(null);
+        Civilization civilization = civilizationRepository.findById(gameStatRequest.civilizationId()).orElse(null);
 
         return new GameStat(
-                gameStatRequest.user(),
-                gameStatRequest.selectedCivilization(),
+                game,
+                user,
+                civilization,
                 gameStatRequest.placement(),
                 gameStatRequest.victoryPoints(),
                 gameStatRequest.militaryPoints(),
