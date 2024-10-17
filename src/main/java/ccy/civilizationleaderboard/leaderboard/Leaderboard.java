@@ -1,6 +1,7 @@
 package ccy.civilizationleaderboard.leaderboard;
 
 import ccy.civilizationleaderboard.user.model.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Leaderboard {
             joinColumns = @JoinColumn(name = "leaderboard_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+    @JsonManagedReference
     private List<User> leaderboardMembers;
 
     //used in LeaderboardRequestMapper to map from dto to model
