@@ -5,6 +5,7 @@ import ccy.civilizationleaderboard.gamestat.model.Placement;
 
 public record GameStatResponse(
         int id,
+        int gameId,
         int userId,
         Civilization civilization,
         Placement placement,

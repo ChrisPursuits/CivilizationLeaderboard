@@ -14,6 +14,7 @@ public class GameStatResponseMapper implements Function<GameStat, GameStatRespon
     public GameStatResponse apply(GameStat gameStat) {
         return new GameStatResponse(
                 gameStat.getId(),
+                gameStat.getGame().getId(),
                 gameStat.getUser().getId(),
                 gameStat.getSelectedCivilization(),
                 gameStat.getPlacement(),
