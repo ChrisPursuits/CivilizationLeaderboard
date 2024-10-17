@@ -2,17 +2,16 @@ package ccy.civilizationleaderboard.game;
 
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.model.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -31,6 +30,7 @@ public class Game {
     private List<User> userList;
 
     @OneToMany(mappedBy = "game")
+    @JsonBackReference
     private List<GameStat> gameStatList;
 
     //used in GameRequestMapper
