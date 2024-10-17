@@ -1,5 +1,7 @@
 package ccy.civilizationleaderboard.gamestat.service;
 
+import ccy.civilizationleaderboard.civilization.CivilizationRepository;
+import ccy.civilizationleaderboard.civilization.model.Civilization;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
@@ -23,8 +25,8 @@ public class GameStatServiceImpl implements GameStatService {
     private final GameStatResponseMapper gameStatResponseMapper;
     private final GameStatRequestMapper gameStatRequestMapper;
     private final GameStatRepository gameStatRepository;
-    private final UserRepository userRepository;
     private final UserService userService;
+
 
 
     @Override
@@ -49,24 +51,27 @@ public class GameStatServiceImpl implements GameStatService {
                 .collect(Collectors.toSet());
     }
 
-
+    //TODO
+    //make null checks for Game, civilization and user. If any of these are null, throw an exception.
+    //this should be caught by the controller, and return a BadRequest to the front end.
     @Override
     public GameStatResponse createGameStat(GameStatRequest postRequest) {
 
-        GameStat gameStat = gameStatRequestMapper.apply(postRequest);
+        GameStat gameStat = gameStatRequestMapper.apply(postRequest); //the mapper creates the relation between gamestat and game.
         GameStat savedGameStat = gameStatRepository.save(gameStat);
 
-        userService.updateUserPlacementHistory(gameStat);
+        userService.updateUserPlacementHistory(savedGameStat);
+        userService.updateGameHistory(savedGameStat);
 
         return gameStatResponseMapper.apply(savedGameStat);
     }
 
 
     @Override
-    public GameStatResponse editGameStat(int id, GameStatRequest putRequest) {
+    public GameStatResponse editGameStat(int gameStatId, GameStatRequest putRequest) {
 
         GameStat gameStat = gameStatRequestMapper.apply(putRequest);
-        gameStat.setId(id);
+        gameStat.setId(gameStatId);
 
         GameStat editedGameStat = gameStatRepository.save(gameStat);
 
@@ -84,16 +89,12 @@ public class GameStatServiceImpl implements GameStatService {
     @Override
     public boolean doesExist(GameStatRequest postRequest) {
 
-        Optional<User> userOptional = userRepository.findById(postRequest.user().getId());
-        if (userOptional.isEmpty()) {
-            return true; //This will cause controller to respond with BadRequest.
-        }
+        GameStat gameStat = gameStatRequestMapper.apply(postRequest);
 
-        User user = userOptional.get();
-
-        return gameStatRepository.existsByUserAndSelectedCivilizationAndPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
-                user,
-                postRequest.selectedCivilization(),
+        return gameStatRepository.existsByGameAndUserAndSelectedCivilizationAndPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+                gameStat.getGame(),
+                gameStat.getUser(),
+                gameStat.getSelectedCivilization(),
                 postRequest.placement(),
                 postRequest.victoryPoints(),
                 postRequest.militaryPoints(),

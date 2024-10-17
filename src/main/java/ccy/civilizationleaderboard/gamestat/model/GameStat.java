@@ -19,7 +19,7 @@ public class GameStat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "game_id")
     @JsonManagedReference
     private Game game;
@@ -48,7 +48,8 @@ public class GameStat {
 
 
     //used in GameStatRequestMapper
-    public GameStat(User user, Civilization civilization, Placement placement, int victoryPoints, int militaryPoints, int sciencePoints, int culturePoints, int gold, int religiousPoints, int diplomaticPoints) {
+    public GameStat(Game game, User user, Civilization civilization, Placement placement, int victoryPoints, int militaryPoints, int sciencePoints, int culturePoints, int gold, int religiousPoints, int diplomaticPoints) {
+        this.game = game;
         this.user = user;
         this.selectedCivilization = civilization;
         this.placement = placement;

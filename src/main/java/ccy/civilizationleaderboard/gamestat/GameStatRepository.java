@@ -1,6 +1,7 @@
 package ccy.civilizationleaderboard.gamestat;
 
 import ccy.civilizationleaderboard.civilization.model.Civilization;
+import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.gamestat.model.Placement;
 import ccy.civilizationleaderboard.user.model.User;
@@ -14,7 +15,8 @@ public interface GameStatRepository extends JpaRepository<GameStat, Integer> {
     Set<GameStat> findGameStatsByGameId(int gameId);
 
     //TODO improve this method using a combination of placement, militaryPoints etc. as a unique identifier in the db
-    boolean existsByUserAndSelectedCivilizationAndPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+    boolean existsByGameAndUserAndSelectedCivilizationAndPlacementAndVictoryPointsAndMilitaryPointsAndSciencePointsAndCulturePointsAndGoldAndReligiousPointsAndDiplomaticPoints(
+            Game game,
             User user,
             Civilization civilization,
             Placement placement,
