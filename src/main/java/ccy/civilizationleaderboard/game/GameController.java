@@ -78,7 +78,7 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
-
+    //TODO FIX DELETE
     @DeleteMapping("/game/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable int id) {
 

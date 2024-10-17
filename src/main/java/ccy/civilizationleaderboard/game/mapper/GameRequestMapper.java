@@ -14,7 +14,8 @@ public class GameRequestMapper implements Function<GameRequest, Game> {
     public Game apply(GameRequest gameRequest) {
         return new Game(
                 gameRequest.title(),
-                gameRequest.description()
+                gameRequest.description(),
+                gameRequest.finishingRound()
         );
     }
 }
