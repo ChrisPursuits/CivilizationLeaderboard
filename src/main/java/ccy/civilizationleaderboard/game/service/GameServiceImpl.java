@@ -6,9 +6,11 @@ import ccy.civilizationleaderboard.game.dto.GameRequest;
 import ccy.civilizationleaderboard.game.dto.GameResponse;
 import ccy.civilizationleaderboard.game.mapper.GameRequestMapper;
 import ccy.civilizationleaderboard.game.mapper.GameResponseMapper;
+import ccy.civilizationleaderboard.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,5 +82,14 @@ public class GameServiceImpl implements GameService {
                 postRequest.title(),
                 postRequest.description()
         );
+    }
+
+    @Override
+    public List<GameResponse> getAllGamesByUsername(String username) {
+        List<Game> gameList = gameRepository.findAllGamesByUsername(username);
+
+        return gameList.stream()
+                .map(gameResponseMapper)
+                .toList();
     }
 }

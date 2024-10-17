@@ -5,16 +5,20 @@ import ccy.civilizationleaderboard.game.dto.GameResponse;
 import ccy.civilizationleaderboard.game.service.GameService;
 import ccy.civilizationleaderboard.requestvalidator.EntityType;
 import ccy.civilizationleaderboard.requestvalidator.RequestValidator;
+import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class GameController {
 
+    private final UserService userService;
     private final GameService gameService;
     private final RequestValidator requestValidator;
 
@@ -33,6 +37,17 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/games")
+    public ResponseEntity<List<GameResponse>> getGames(@RequestParam String username) {
+
+        boolean doesExist = userService.doesExist(username);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<GameResponse> response = gameService.getAllGamesByUsername(username);
+        return ResponseEntity.ok(response);
+    }
 
     @PostMapping("/game")
     public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest postRequest) {
