@@ -13,6 +13,7 @@ public interface UserService {
 
    void updateGameHistory(GameStat gameStat);
    void updateUserPlacementHistory(GameStat gameStat);
+   void updateUserPlacementHistory(User user);
 
    boolean doesExist(int id);
    boolean doesExist(String username);

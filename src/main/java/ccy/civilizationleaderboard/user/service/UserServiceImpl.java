@@ -37,9 +37,23 @@ public class UserServiceImpl implements UserService {
         List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
         user.setPlacementHistory(placementHistory);
 
+
+        user.setTotalGamesPlayed(placementHistory.size());
         //this line is actually redundant when I called the .setPlacementHistory() in the previous line
         //Jpa automatically updated the db with the corresponding data.
         // (just keeping this comment for future me.)
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserPlacementHistory(User user) {
+        List<GameStat> allUserGameStats = user.getGameStatList();
+
+        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
+        user.setPlacementHistory(placementHistory);
+
+        user.setTotalGamesPlayed(placementHistory.size());
+
         userRepository.save(user);
     }
 

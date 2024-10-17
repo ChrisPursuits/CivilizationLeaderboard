@@ -22,10 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GameStatServiceImpl implements GameStatService {
 
+    private final UserService userService;
+
     private final GameStatResponseMapper gameStatResponseMapper;
     private final GameStatRequestMapper gameStatRequestMapper;
     private final GameStatRepository gameStatRepository;
-    private final UserService userService;
 
 
 
@@ -75,13 +76,21 @@ public class GameStatServiceImpl implements GameStatService {
 
         GameStat editedGameStat = gameStatRepository.save(gameStat);
 
+        userService.updateUserPlacementHistory(editedGameStat);
+
         return gameStatResponseMapper.apply(editedGameStat);
     }
 
 
     @Override
     public void deleteGameStatBy(int id) {
+        GameStat gameStat = gameStatRepository.findById(id).orElse(null);
         gameStatRepository.deleteById(id);
+
+        User user = gameStat.getUser();
+        user.getGameStatList().remove(gameStat);
+
+        userService.updateUserPlacementHistory(user);
     }
 
 
