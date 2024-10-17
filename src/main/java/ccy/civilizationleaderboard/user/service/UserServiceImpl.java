@@ -1,5 +1,7 @@
 package ccy.civilizationleaderboard.user.service;
 
+import ccy.civilizationleaderboard.game.Game;
+import ccy.civilizationleaderboard.game.GameRepository;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.UserResponse;
@@ -19,11 +21,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final GameStatRepository gameStatRepository;
     private final UserRepository userRepository;
     private final UserResponseMapper userResponseMapper;
 
+    private final GameRepository gameRepository;
+    private final GameStatRepository gameStatRepository;
 
+
+    //TODO
+    //This should probably be refactored and managed by a costume JPQL query that's called
+    //from the GameStat Service, instead of making dependency to this service class.
     @Override
     public void updateUserPlacementHistory(GameStat gameStat) {
         User user = gameStat.getUser();
@@ -65,6 +72,15 @@ public class UserServiceImpl implements UserService {
                 .toList();
 
         return userResponseList;
+    }
+
+    @Override
+    public void updateGameHistory(GameStat gameStat) {
+        User user = userRepository.findById(gameStat.getUser().getId()).get();
+        Game game = gameRepository.findById(gameStat.getGame().getId()).get();
+
+        user.getGameList().addLast(game);
+        userRepository.save(user);
     }
 
 
