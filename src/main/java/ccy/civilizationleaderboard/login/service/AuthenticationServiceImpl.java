@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .username(registerRequest.username())
                 .password(passwordEncoder.encode(registerRequest.password()))
                 .role(Role.ROLE_USER)
+                .leaderboardList(new ArrayList<>())
+                .gameList(new ArrayList<>())
+                .gameStatList(new ArrayList<>())
+                .totalGamesPlayed(0)
                 .build();
 
         User registedUser = userRepository.save(userToRegister);

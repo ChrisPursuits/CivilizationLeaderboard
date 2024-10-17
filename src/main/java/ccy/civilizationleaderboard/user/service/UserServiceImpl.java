@@ -13,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -50,8 +48,10 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId) {
         List<User> leaderboardMembers = userRepository.findAllByLeaderboardId(leaderboardId);
 
-        for (User user : leaderboardMembers) {
 
+        //TODO
+        //remove this block when back end is finiehsed since it will be redundant.
+        for (User user : leaderboardMembers) {
             //gets all the gameStat on user, and sets total games played.
             List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
             int totalGamesPlayed = allUserGameStats.size();
@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService {
             List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
             user.setPlacementHistory(placementHistory);
         }
+
 
         //sort the leaderboard list by placement history
         leaderboardMembers.sort(new PlacementHistoryComparator());
@@ -87,74 +88,68 @@ public class UserServiceImpl implements UserService {
     private List<Integer> calculatePlacementHistory(List<GameStat> allUserGameStats) {
         List<Integer> placementHistory = new ArrayList<>(12); //max 12 placements
 
-        int firstPlaceCount = 0;
-        int secondPlaceCount = 0;
-        int thirdPlaceCount = 0;
-        int fourthPlaceCount = 0;
-        int fifthPlaceCount = 0;
-        int sixthPlaceCount = 0;
-        int seventhPlaceCount = 0;
-        int eighthPlaceCount = 0;
-        int ninthPlaceCount = 0;
-        int tenthPlaceCount = 0;
+        int firstPlaceCounter = 0;
+        int secondPlaceCounter = 0;
+        int thirdPlaceCounter = 0;
+        int fourthPlaceCounter = 0;
+        int fifthPlaceCounter = 0;
+        int sixthPlaceCounter = 0;
+        int seventhPlaceCounter = 0;
+        int eighthPlaceCounter = 0;
+        int ninthPlaceCounter = 0;
+        int tenthPlaceCounter = 0;
         int eleventhPlaceCount = 0;
         int twelfthPlaceCount = 0;
 
-        placementHistory.addFirst(firstPlaceCount);
-        placementHistory.add(1, secondPlaceCount);
-        placementHistory.add(2, thirdPlaceCount);
-        placementHistory.add(3, fourthPlaceCount);
-        placementHistory.add(4, fifthPlaceCount);
-        placementHistory.add(5, sixthPlaceCount);
-        placementHistory.add(6, seventhPlaceCount);
-        placementHistory.add(7, eighthPlaceCount);
-        placementHistory.add(8, ninthPlaceCount);
-        placementHistory.add(9, tenthPlaceCount);
-        placementHistory.add(10, eleventhPlaceCount);
-        placementHistory.addLast(twelfthPlaceCount);
+        placementHistory.addAll(List.of(0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0));
 
         for (GameStat stat : allUserGameStats) {
 
             switch (stat.getPlacement()) {
                 case FIRST -> {
-                    firstPlaceCount++;
-                    placementHistory.set(0, firstPlaceCount);
+                    firstPlaceCounter++;
+                    placementHistory.set(0, firstPlaceCounter);
                 }
+
                 case SECOND -> {
-                    secondPlaceCount++;
-                    placementHistory.set(1, secondPlaceCount);
+                    secondPlaceCounter++;
+                    placementHistory.set(1, secondPlaceCounter);
                 }
+
                 case THIRD -> {
-                    thirdPlaceCount++;
-                    placementHistory.set(2, thirdPlaceCount);
+                    thirdPlaceCounter++;
+                    placementHistory.set(2, thirdPlaceCounter);
                 }
+
                 case FOURTH -> {
-                    fourthPlaceCount++;
-                    placementHistory.set(3, fourthPlaceCount);
+                    fourthPlaceCounter++;
+                    placementHistory.set(3, fourthPlaceCounter);
                 }
+
                 case FIFTH -> {
-                    fifthPlaceCount++;
-                    placementHistory.set(4, fifthPlaceCount);
+                    fifthPlaceCounter++;
+                    placementHistory.set(4, fifthPlaceCounter);
                 }
+
                 case SIXTH -> {
-                    sixthPlaceCount++;
-                    placementHistory.set(5, sixthPlaceCount);
+                    sixthPlaceCounter++;
+                    placementHistory.set(5, sixthPlaceCounter);
                 }
                 case SEVENTH -> {
-                    seventhPlaceCount++;
-                    placementHistory.set(6, seventhPlaceCount);
+                    seventhPlaceCounter++;
+                    placementHistory.set(6, seventhPlaceCounter);
                 }
                 case EIGHTH -> {
-                    eighthPlaceCount++;
-                    placementHistory.set(7, eighthPlaceCount);
+                    eighthPlaceCounter++;
+                    placementHistory.set(7, eighthPlaceCounter);
                 }
                 case NINTH -> {
-                    ninthPlaceCount++;
-                    placementHistory.set(8, ninthPlaceCount);
+                    ninthPlaceCounter++;
+                    placementHistory.set(8, ninthPlaceCounter);
                 }
                 case TENTH -> {
-                    tenthPlaceCount++;
-                    placementHistory.set(9, tenthPlaceCount);
+                    tenthPlaceCounter++;
+                    placementHistory.set(9, tenthPlaceCounter);
                 }
                 case ELEVENTH -> {
                     eleventhPlaceCount++;
@@ -168,8 +163,6 @@ public class UserServiceImpl implements UserService {
         }
         return placementHistory;
     }
-
-
 
 
     @Override
