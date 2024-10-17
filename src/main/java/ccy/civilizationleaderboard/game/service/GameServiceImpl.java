@@ -7,6 +7,8 @@ import ccy.civilizationleaderboard.game.dto.GameResponse;
 import ccy.civilizationleaderboard.game.mapper.GameRequestMapper;
 import ccy.civilizationleaderboard.game.mapper.GameResponseMapper;
 import ccy.civilizationleaderboard.user.UserRepository;
+import ccy.civilizationleaderboard.user.model.User;
+import ccy.civilizationleaderboard.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,11 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GameServiceImpl implements GameService {
 
+    private final UserRepository userRepository;
+    private final UserService userService;
+
     private final GameRepository gameRepository;
     private final GameRequestMapper GameRequestMapper;
-    private final GameResponseMapper GameResponseMapper;
     private final GameResponseMapper gameResponseMapper;
 
 
@@ -63,7 +67,13 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void deleteGameBy(int id) {
+        Game gameToDelete = gameRepository.findById(id).orElse(null);
+        List<User> allUsers = userRepository.findAllByGameId(id);
+        userService.updateUserGameTableOnGameDeletion(allUsers, gameToDelete);
+
         gameRepository.deleteById(id);
+
+        userService.updateUserPlacementHistory(allUsers);
     }
 
 

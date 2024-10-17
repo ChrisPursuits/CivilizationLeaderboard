@@ -30,7 +30,7 @@ public class Game {
     @JsonBackReference
     private List<User> userList;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
     @JsonBackReference
     private List<GameStat> gameStatList;
 

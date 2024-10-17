@@ -26,35 +26,10 @@ public class UserServiceImpl implements UserService {
     private final GameStatRepository gameStatRepository;
 
 
-    //TODO
-    //This should probably be refactored and managed by a costume JPQL query that's called
-    //from the GameStat Service, instead of making dependency to this service class.
-    @Override
-    public void updateUserPlacementHistory(GameStat gameStat) {
-        User user = gameStat.getUser();
-        List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
-
-        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
-        user.setPlacementHistory(placementHistory);
-
-
-        user.setTotalGamesPlayed(placementHistory.size());
-        //this line is actually redundant when I called the .setPlacementHistory() in the previous line
-        //Jpa automatically updated the db with the corresponding data.
-        // (just keeping this comment for future me.)
-        userRepository.save(user);
-    }
 
     @Override
-    public void updateUserPlacementHistory(User user) {
-        List<GameStat> allUserGameStats = user.getGameStatList();
-
-        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
-        user.setPlacementHistory(placementHistory);
-
-        user.setTotalGamesPlayed(placementHistory.size());
-
-        userRepository.save(user);
+    public List<User> findAllByGameId(int gameId) {
+        return userRepository.findAllByGameId(gameId);
     }
 
 
@@ -89,6 +64,8 @@ public class UserServiceImpl implements UserService {
         return userResponseList;
     }
 
+
+
     @Override
     public void updateGameHistory(GameStat gameStat) {
         User user = userRepository.findById(gameStat.getUser().getId()).get();
@@ -97,6 +74,55 @@ public class UserServiceImpl implements UserService {
         user.getGameList().addLast(game);
         userRepository.save(user);
     }
+
+
+    //TODO
+    //This should probably be refactored and managed by a costume JPQL query that's called
+    //from the GameStat Service, instead of making dependency to this service class.
+    @Override
+    public void updateUserPlacementHistory(GameStat gameStat) {
+        User user = gameStat.getUser();
+        List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
+
+        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
+        user.setPlacementHistory(placementHistory);
+
+        user.setTotalGamesPlayed(allUserGameStats.size());
+        //this line is actually redundant when I called the .setPlacementHistory() in the previous line
+        //Jpa automatically updated the db with the corresponding data.
+        // (just keeping this comment for future me.)
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserPlacementHistory(User user) {
+        List<GameStat> allUserGameStats = user.getGameStatList();
+
+        List<Integer> placementHistory = calculatePlacementHistory(allUserGameStats);
+        user.setPlacementHistory(placementHistory);
+
+        user.setTotalGamesPlayed(allUserGameStats.size());
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserPlacementHistory(List<User> allUsers) {
+        for (User user : allUsers) {
+            updateUserPlacementHistory(user);
+        }
+    }
+
+
+    @Override
+    public void updateUserGameTableOnGameDeletion(List<User> allUsers, Game gameToDelete) {
+        for (User user : allUsers) {
+            user.getGameList().remove(gameToDelete);
+            userRepository.save(user);
+        }
+    }
+
+
 
 
     private List<Integer> calculatePlacementHistory(List<GameStat> allUserGameStats) {
@@ -115,7 +141,7 @@ public class UserServiceImpl implements UserService {
         int eleventhPlaceCount = 0;
         int twelfthPlaceCount = 0;
 
-        placementHistory.addAll(List.of(0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0));
+        placementHistory.addAll(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
         for (GameStat stat : allUserGameStats) {
 
