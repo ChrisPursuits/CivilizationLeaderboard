@@ -24,9 +24,9 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest registerRequest) {
 
-        User user = userService.findUserBy(registerRequest.username());
+        boolean doesExist = userService.doesExist(registerRequest.username());
         //username already taken
-        if (user != null) {
+        if (doesExist) {
             return ResponseEntity.badRequest().build();
         }
 

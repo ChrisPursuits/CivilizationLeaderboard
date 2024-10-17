@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface UserService {
 
-   User findUserBy(String username);
    List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId);
+
    void updateUserPlacementHistory(GameStat gameStat);
+
    boolean doesExist(int id);
    boolean doesExist(String username);
 }
