@@ -4,12 +4,14 @@ import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
 import ccy.civilizationleaderboard.user.UserResponse;
 import ccy.civilizationleaderboard.user.UserResponseMapper;
+import ccy.civilizationleaderboard.user.comparator.PlacementHistoryComparator;
 import ccy.civilizationleaderboard.user.model.User;
 import ccy.civilizationleaderboard.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,9 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId) {
-        List<User> sortedByPlacements = userRepository.findAllUsersByLeaderboardIdSortedByPlacements(leaderboardId);
+        List<User> leaderboardMembers = userRepository.findAllByLeaderboardId(leaderboardId);
 
-        for (User user : sortedByPlacements) {
+        for (User user : leaderboardMembers) {
 
             //gets all the gameStat on user, and sets total games played.
             List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
@@ -65,8 +67,11 @@ public class UserServiceImpl implements UserService {
             user.setPlacementHistory(placementHistory);
         }
 
+        //sort the leaderboard list by placement history
+        leaderboardMembers.sort(new PlacementHistoryComparator());
+
         //map user list to userResponse list.
-        List<UserResponse> userResponseList = sortedByPlacements
+        List<UserResponse> userResponseList = leaderboardMembers
                 .stream()
                 .map(userResponseMapper)
                 .toList();
