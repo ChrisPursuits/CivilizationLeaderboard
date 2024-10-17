@@ -25,18 +25,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User findUserBy(String username) {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-
-        if (userOptional.isEmpty()) {
-            return null;
-        }
-
-        User foundUser = userOptional.get();
-        return foundUser;
-    }
-
-    @Override
     public void updateUserPlacementHistory(GameStat gameStat) {
         User user = gameStat.getUser();
         List<GameStat> allUserGameStats = gameStatRepository.findAllByUser(user);
