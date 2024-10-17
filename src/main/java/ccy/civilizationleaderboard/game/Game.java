@@ -27,6 +27,7 @@ public class Game {
     private int finishingRound;
 
     @ManyToMany(mappedBy = "gameList")
+    @JsonBackReference
     private List<User> userList;
 
     @OneToMany(mappedBy = "game")
