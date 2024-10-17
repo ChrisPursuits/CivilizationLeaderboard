@@ -14,8 +14,7 @@ public class LeaderboardResponseMapper implements Function<Leaderboard, Leaderbo
         return new LeaderboardResponse(
                 leaderboard.getId(),
                 leaderboard.getName(),
-                leaderboard.getDescription(),
-                leaderboard.getLeaderboardMembers()
+                leaderboard.getDescription()
         );
     }
 }
