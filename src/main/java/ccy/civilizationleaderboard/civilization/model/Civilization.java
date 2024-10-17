@@ -1,6 +1,7 @@
 package ccy.civilizationleaderboard.civilization.model;
 
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,7 @@ public class Civilization {
     private String leader;
 
     @OneToMany(mappedBy = "selectedCivilization")
+    @JsonBackReference
     private List<GameStat> gameStatList;
 
     public Civilization(ccy.civilizationleaderboard.civilization.model.enums.Civilization civilization, String leader) {
