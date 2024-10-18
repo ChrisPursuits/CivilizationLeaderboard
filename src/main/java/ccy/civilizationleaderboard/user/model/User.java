@@ -2,6 +2,7 @@ package ccy.civilizationleaderboard.user.model;
 
 import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
+import ccy.civilizationleaderboard.invite.model.Invite;
 import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -67,6 +68,12 @@ public class User implements UserDetails {
     @JsonBackReference
     private List<GameStat> gameStatList;
 
+
+    @OneToMany(mappedBy = "issuer")
+    private List<Invite> issuedInvites;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Invite> receivedInvites;
 
     //used in AuthenticationServiceImpl for registering new users
     public User(String username, String password, Role role) {
