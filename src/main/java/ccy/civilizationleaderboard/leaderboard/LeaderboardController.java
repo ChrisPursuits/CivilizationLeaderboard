@@ -51,6 +51,8 @@ public class LeaderboardController {
         return ResponseEntity.ok(response);
     }
 
+    //TODO
+    //consider removing this endpoint as it forcefully adds a user to a leaderboard, might be fun to have for an admin, lol.
     @PostMapping("/leaderboard/{leaderboardId}")
     public ResponseEntity<LeaderboardResponse> addUserToLeaderboard(@PathVariable int leaderboardId,
                                                                     @RequestParam int userId) {
