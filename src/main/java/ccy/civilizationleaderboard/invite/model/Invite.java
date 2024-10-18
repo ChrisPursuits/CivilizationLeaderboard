@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.invite.model;
 
+import ccy.civilizationleaderboard.leaderboard.Leaderboard;
 import ccy.civilizationleaderboard.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,10 @@ public class Invite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "leaderboard_id")
+    private Leaderboard leaderboard;
 
     @ManyToOne
     @JoinColumn(name = "issuer_id")

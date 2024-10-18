@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.leaderboard;
 
+import ccy.civilizationleaderboard.invite.model.Invite;
 import ccy.civilizationleaderboard.user.model.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -30,6 +31,9 @@ public class Leaderboard {
     )
     @JsonManagedReference
     private List<User> leaderboardMembers;
+
+    @OneToMany(mappedBy = "leaderboard")
+    private List<Invite> invites;
 
     //used in LeaderboardRequestMapper to map from dto to model
     public Leaderboard(String name, String description) {
