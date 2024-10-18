@@ -36,6 +36,8 @@ public class Invite {
 
     private Date issuedDate;
     private Date respondedDate;
+
+    @Enumerated(EnumType.STRING)
     private InviteStatus status;
 
 }
