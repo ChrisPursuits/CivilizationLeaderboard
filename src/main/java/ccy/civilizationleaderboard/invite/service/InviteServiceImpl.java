@@ -8,6 +8,8 @@ import ccy.civilizationleaderboard.invite.mapper.InviteResponseMapper;
 import ccy.civilizationleaderboard.invite.model.Invite;
 import ccy.civilizationleaderboard.invite.model.InviteStatus;
 import ccy.civilizationleaderboard.invite.repository.InviteRepository;
+import ccy.civilizationleaderboard.leaderboard.Leaderboard;
+import ccy.civilizationleaderboard.leaderboard.service.LeaderboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,9 @@ import java.util.Optional;
 public class InviteServiceImpl implements InviteService {
 
     private final InviteRepository inviteRepository;
-    private final InviteResponseMapper inviteResponseMapper;
+    private final LeaderboardService leaderboardService;
     private final InviteRequestMapper inviteRequestMapper;
+    private final InviteResponseMapper inviteResponseMapper;
 
 
     @Override
@@ -36,6 +39,7 @@ public class InviteServiceImpl implements InviteService {
     @Override
     public InviteResponse sendInvite(InviteRequest postRequest) {
         Invite invite = inviteRequestMapper.apply(postRequest);
+        invite.setStatus(InviteStatus.PENDING);
 
         Invite sentInvite = inviteRepository.save(invite);
 
@@ -70,6 +74,8 @@ public class InviteServiceImpl implements InviteService {
         invite.setStatus(InviteStatus.ACCEPTED);
         invite.setRespondedDate(new Date());
         inviteRepository.save(invite);
+
+        leaderboardService.acceptedInvitation(invite);
 
         return "Invite has been accepted.";
     }

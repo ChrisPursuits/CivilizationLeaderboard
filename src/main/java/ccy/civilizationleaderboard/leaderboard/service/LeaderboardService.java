@@ -1,5 +1,6 @@
 package ccy.civilizationleaderboard.leaderboard.service;
 
+import ccy.civilizationleaderboard.invite.model.Invite;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardRequest;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardResponse;
 
@@ -12,5 +13,7 @@ public interface LeaderboardService {
 
     boolean doesExist(int id);
     boolean doesExist(LeaderboardRequest postRequest);
+
     LeaderboardResponse addUserToLeaderboard(int leaderboardId, int userId);
+    void acceptedInvitation(Invite invite );
 }
