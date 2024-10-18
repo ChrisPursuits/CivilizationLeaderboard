@@ -4,6 +4,8 @@ import ccy.civilizationleaderboard.game.service.GameService;
 import ccy.civilizationleaderboard.game.dto.GameRequest;
 import ccy.civilizationleaderboard.gamestat.dto.GameStatRequest;
 import ccy.civilizationleaderboard.gamestat.service.GameStatService;
+import ccy.civilizationleaderboard.invite.dto.InviteRequest;
+import ccy.civilizationleaderboard.invite.service.InviteService;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardRequest;
 import ccy.civilizationleaderboard.leaderboard.service.LeaderboardService;
 import lombok.AllArgsConstructor;
@@ -16,9 +18,10 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class RequestValidator {
 
-    private final LeaderboardService leaderboardService;
     private final GameService gameService;
+    private final InviteService inviteService;
     private final GameStatService gameStatService;
+    private final LeaderboardService leaderboardService;
 
     public ResponseEntity<Void> validateRequest(HttpMethod method, EntityType entity, Object requestData) {
         boolean doesExist;
@@ -66,6 +69,7 @@ public class RequestValidator {
             case LEADERBOARD -> leaderboardService.doesExist(id);
             case GAME -> gameService.doesExist(id);
             case GAMESTAT -> gameStatService.doesExist(id);
+            default -> false;
         };
     }
 
@@ -76,6 +80,7 @@ public class RequestValidator {
             case LEADERBOARD -> requestBody instanceof LeaderboardRequest && leaderboardService.doesExist((LeaderboardRequest) requestBody);
             case GAME -> requestBody instanceof GameRequest && gameService.doesExist((GameRequest) requestBody);
             case GAMESTAT -> requestBody instanceof GameStatRequest && gameStatService.doesExist((GameStatRequest) requestBody);
+            case INVITE -> requestBody instanceof InviteRequest && inviteService.doesExist((InviteRequest) requestBody);
         };
     }
 }

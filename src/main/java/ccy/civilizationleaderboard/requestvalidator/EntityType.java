@@ -4,5 +4,6 @@ public enum EntityType {
 
     LEADERBOARD,
     GAME,
-    GAMESTAT
+    GAMESTAT,
+    INVITE
 }
