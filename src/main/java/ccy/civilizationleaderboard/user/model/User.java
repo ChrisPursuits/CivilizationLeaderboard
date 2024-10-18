@@ -42,7 +42,7 @@ public class User implements UserDetails {
     private int totalGamesPlayed;
 
     @ElementCollection
-    @CollectionTable(name = "placement_history", joinColumns = @JoinColumn(name = "app_user_id"))
+    @CollectionTable(name = "user_placement_history", joinColumns = @JoinColumn(name = "app_user_id"))
     @Column(name = "placement")
     private List<Integer> placementHistory;
 
