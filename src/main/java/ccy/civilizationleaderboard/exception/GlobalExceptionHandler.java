@@ -14,6 +14,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
+
+    @ExceptionHandler(LeaderboardNotFoundException.class)
+    public ResponseEntity<String> leaderboardNotFoundException(LeaderboardNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+
     @ExceptionHandler(UsernameNotFoundException.class)
     private ResponseEntity<String> usernameNotFoundException(UsernameNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
