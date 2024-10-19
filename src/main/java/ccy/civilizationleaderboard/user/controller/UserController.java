@@ -24,6 +24,20 @@ public class UserController {
 
 
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<UserResponse> getUserByUsername(@PathVariable String username) {
+
+        boolean doesExist = userService.doesExist(username);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserResponse response = userService.getUserByUsername(username);
+        return ResponseEntity.ok(response);
+    }
+
+
+
     @GetMapping("/users/{leaderboardId}")
     public ResponseEntity<List<UserResponse>> getAllSortedUsersByLeaderboardId(@PathVariable int leaderboardId) {
 
