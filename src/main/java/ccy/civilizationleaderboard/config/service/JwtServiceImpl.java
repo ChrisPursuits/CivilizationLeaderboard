@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
 
     @Value("${SECRET_KEY}")
-    private String SECRET_KEY;
+    private String SECRET_KEY; //TODO add this secret on github / AZURE when deployed in an env var
 
     @Override
     public String extractUsername(String token) {
