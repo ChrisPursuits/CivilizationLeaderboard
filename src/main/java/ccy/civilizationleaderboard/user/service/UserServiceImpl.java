@@ -4,6 +4,8 @@ import ccy.civilizationleaderboard.game.Game;
 import ccy.civilizationleaderboard.game.GameRepository;
 import ccy.civilizationleaderboard.gamestat.GameStatRepository;
 import ccy.civilizationleaderboard.gamestat.model.GameStat;
+import ccy.civilizationleaderboard.leaderboard.Leaderboard;
+import ccy.civilizationleaderboard.leaderboard.LeaderboardRepository;
 import ccy.civilizationleaderboard.user.dto.UserResponse;
 import ccy.civilizationleaderboard.user.mapper.UserResponseMapper;
 import ccy.civilizationleaderboard.user.comparator.PlacementHistoryComparator;
@@ -19,12 +21,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final LeaderboardRepository leaderboardRepository;
+
     private final UserRepository userRepository;
     private final UserResponseMapper userResponseMapper;
 
     private final GameRepository gameRepository;
     private final GameStatRepository gameStatRepository;
 
+
+
+    @Override
+    public UserResponse getUserByUsername(String username) {
+        List<Leaderboard> leaderboardList = leaderboardRepository.findAllByUsername(username);
+
+        //null check already dealt with in controller but it should be here, oh well.
+        User user = userRepository.findByUsername(username).get();
+        UserResponse userResponse = userResponseMapper.apply(user);
+
+        List<Integer> userLeaderboardList = userResponse.leaderboardList();
+        for (Leaderboard leaderboard : leaderboardList) {
+            userLeaderboardList.add(leaderboard.getId());
+        }
+
+        return userResponse;
+    }
 
 
     @Override

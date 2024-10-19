@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface UserService {
 
+   UserResponse getUserByUsername(String username);
+
    List<UserResponse> getAllUsersByLeaderboardIdSorted(int leaderboardId);
    List<User> findAllByGameId(int gameId);
 
