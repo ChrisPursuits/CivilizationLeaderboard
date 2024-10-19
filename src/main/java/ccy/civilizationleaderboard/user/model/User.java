@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 
@@ -40,6 +41,8 @@ public class User implements UserDetails {
     private Role role;
 
     private int totalGamesPlayed;
+
+    private Date creationDate;
 
     @ElementCollection
     @CollectionTable(name = "user_placement_history", joinColumns = @JoinColumn(name = "app_user_id"))

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 @Service
@@ -36,6 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .gameList(new ArrayList<>())
                 .gameStatList(new ArrayList<>())
                 .totalGamesPlayed(0)
+                .creationDate(new Date())
                 .build();
 
         User registedUser = userRepository.save(userToRegister);
