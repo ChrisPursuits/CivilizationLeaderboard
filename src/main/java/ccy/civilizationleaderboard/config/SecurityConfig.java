@@ -31,6 +31,7 @@ public class SecurityConfig {
         http
                 .headers(HeadersConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfiguration()))
+//                .cors(cors -> cors.disable())
                 .csrf(csrf -> csrf.disable())
 
 
@@ -47,7 +48,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfiguration() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("......")); //TODO add frontend origin url
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:63342")); // all origins allowed
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.setAllowCredentials(true);
