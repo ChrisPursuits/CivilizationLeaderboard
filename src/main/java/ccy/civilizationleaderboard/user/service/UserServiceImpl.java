@@ -37,14 +37,7 @@ public class UserServiceImpl implements UserService {
 
         //null check already dealt with in controller but it should be here, oh well.
         User user = userRepository.findByUsername(username).get();
-        UserResponse userResponse = userResponseMapper.apply(user);
-
-        List<Integer> userLeaderboardList = userResponse.leaderboardList();
-        for (Leaderboard leaderboard : leaderboardList) {
-            userLeaderboardList.add(leaderboard.getId());
-        }
-
-        return userResponse;
+        return userResponseMapper.apply(user);
     }
 
 

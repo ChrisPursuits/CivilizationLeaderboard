@@ -16,8 +16,7 @@ public class UserResponseMapper implements Function<User, UserResponse> {
                 user.getId(),
                 user.getUsername(),
                 user.getTotalGamesPlayed(),
-                user.getPlacementHistory(),
-                new ArrayList<>()
+                user.getPlacementHistory()
         );
     }
 }
