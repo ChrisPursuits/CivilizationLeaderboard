@@ -11,14 +11,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class LeaderboardController {
 
-    private final LeaderboardService leaderboardService;
     private final UserService userService;
     private final RequestValidator requestValidator;
+    private final LeaderboardService leaderboardService;
+
 
 
     @GetMapping("/leaderboard/{id}")
@@ -36,6 +39,22 @@ public class LeaderboardController {
     }
 
 
+    @GetMapping("/leaderboard/{username}")
+    public ResponseEntity<List<LeaderboardResponse>> getLeaderboardsByUsername(@PathVariable String username) {
+
+        boolean doesExist = userService.doesExist(username);
+        if (!doesExist) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<LeaderboardResponse> response = leaderboardService.getAllLeaderboardsByUsername(username);
+        return ResponseEntity.ok(response);
+    }
+
+
+
+
+
 
     @PostMapping("/leaderboard")
     public ResponseEntity<LeaderboardResponse> createLeaderboard(@RequestBody LeaderboardRequest postRequest) {
@@ -50,6 +69,11 @@ public class LeaderboardController {
         LeaderboardResponse response = leaderboardService.createLeaderboard(postRequest);
         return ResponseEntity.ok(response);
     }
+
+
+
+
+
 
     //TODO
     //consider removing this endpoint as it forcefully adds a user to a leaderboard, might be fun to have for an admin, lol.
@@ -74,6 +98,10 @@ public class LeaderboardController {
     }
 
 
+
+
+
+
     @PutMapping("/leaderboard/{id}")
     public ResponseEntity<LeaderboardResponse> updateLeaderboard(@PathVariable int id, @RequestBody LeaderboardRequest putRequest) {
 
@@ -88,6 +116,9 @@ public class LeaderboardController {
         return ResponseEntity.ok(response);
 
     }
+
+
+
 
 
 

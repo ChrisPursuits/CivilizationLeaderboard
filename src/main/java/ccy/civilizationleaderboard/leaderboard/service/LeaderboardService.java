@@ -4,6 +4,8 @@ import ccy.civilizationleaderboard.invite.model.Invite;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardRequest;
 import ccy.civilizationleaderboard.leaderboard.dto.LeaderboardResponse;
 
+import java.util.List;
+
 public interface LeaderboardService {
 
     LeaderboardResponse getLeaderboardBy(int id);
@@ -16,4 +18,6 @@ public interface LeaderboardService {
 
     LeaderboardResponse addUserToLeaderboard(int leaderboardId, int userId);
     void acceptedInvitation(Invite invite );
+
+    List<LeaderboardResponse> getAllLeaderboardsByUsername(String username);
 }

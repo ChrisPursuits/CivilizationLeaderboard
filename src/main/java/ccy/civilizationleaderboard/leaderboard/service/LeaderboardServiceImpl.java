@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,16 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         Leaderboard foundLeaderboard = leaderboardOptional.get();
         return leaderboardResponseMapper.apply(foundLeaderboard);
     }
+
+
+    @Override
+    public List<LeaderboardResponse> getAllLeaderboardsByUsername(String username) {
+        List<Leaderboard> leaderboardList = leaderboardRepository.findAllByUsername(username);
+        return leaderboardList.stream()
+                .map(leaderboardResponseMapper)
+                .toList();
+    }
+
 
     @Override
     public LeaderboardResponse createLeaderboard(LeaderboardRequest postRequest) {
