@@ -60,9 +60,11 @@ public class LeaderboardServiceImpl implements LeaderboardService {
 
     @Override
     public LeaderboardResponse editLeaderboard(int id, LeaderboardRequest putRequest) {
+        List<User> userList = userRepository.findAllByLeaderboardId(id);
 
         Leaderboard leaderboard = leaderboardRequestMapper.apply(putRequest);
         leaderboard.setId(id);
+        leaderboard.setLeaderboardMembers(userList);
 
         Leaderboard updatedLeaderboard = leaderboardRepository.save(leaderboard);
 
