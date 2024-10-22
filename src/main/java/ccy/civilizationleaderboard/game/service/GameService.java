@@ -8,7 +8,7 @@ import java.util.List;
 public interface GameService {
 
     GameResponse getGameBy(int id);
-    GameResponse createGame(GameRequest postRequest);
+    GameResponse createGame(String username, GameRequest postRequest);
     GameResponse editGame(int id, GameRequest putRequest);
     void deleteGameBy(int id);
 

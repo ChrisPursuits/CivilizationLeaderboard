@@ -37,6 +37,7 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
+
     @GetMapping("/games")
     public ResponseEntity<List<GameResponse>> getGames(@RequestParam String username) {
 
@@ -49,8 +50,19 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/game")
-    public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest postRequest) {
+
+
+
+
+
+    @PostMapping("/game/user/{username}")
+    public ResponseEntity<GameResponse> createGame(@PathVariable String username,
+                                                   @RequestBody GameRequest postRequest) {
+
+        boolean doesExist = userService.doesExist(username);
+        if (!doesExist) {
+            return ResponseEntity.notFound().build();
+        }
 
         ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.POST, EntityType.GAME, postRequest);
         if (validationResponse != null) {
@@ -59,9 +71,13 @@ public class GameController {
                     .build();
         }
 
-        GameResponse response = gameService.createGame(postRequest);
+        GameResponse response = gameService.createGame(username, postRequest);
         return ResponseEntity.ok(response);
     }
+
+
+
+
 
 
     @PutMapping("/game/{id}")
@@ -77,6 +93,11 @@ public class GameController {
         GameResponse response = gameService.editGame(id, putRequest);
         return ResponseEntity.ok(response);
     }
+
+
+
+
+
 
     //TODO FIX DELETE
     @DeleteMapping("/game/{id}")

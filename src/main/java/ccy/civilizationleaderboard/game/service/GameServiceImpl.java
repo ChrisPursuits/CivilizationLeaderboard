@@ -40,12 +40,16 @@ public class GameServiceImpl implements GameService {
     }
 
 
-
+    //this method adds the game to the game creators gameList.
     @Override
-    public GameResponse createGame(GameRequest postRequest) {
+    public GameResponse createGame(String username, GameRequest postRequest) {
 
+        User gameCreator = userRepository.findByUsername(username).get();
         Game game = GameRequestMapper.apply(postRequest);
         Game savedGame = gameRepository.save(game);
+
+        gameCreator.getGameList().add(savedGame);
+        userRepository.save(gameCreator);
 
         return gameResponseMapper.apply(savedGame);
     }
