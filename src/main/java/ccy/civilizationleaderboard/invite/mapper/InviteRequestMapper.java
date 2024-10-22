@@ -22,8 +22,8 @@ public class InviteRequestMapper implements Function<InviteRequest, Invite> {
     @Override
     public Invite apply(InviteRequest inviteRequest) {
 
-        User issuer = userRepository.findById(inviteRequest.issuerId()).get();
-        User receiver = userRepository.findById(inviteRequest.receiverId()).get();
+        User issuer = userRepository.findByUsername(inviteRequest.issuerUsername()).get();
+        User receiver = userRepository.findByUsername(inviteRequest.receiverUsername()).get();
         Leaderboard leaderboard = leaderboardRepository.findById(inviteRequest.leaderboardId()).get();
 
         return Invite.builder()
