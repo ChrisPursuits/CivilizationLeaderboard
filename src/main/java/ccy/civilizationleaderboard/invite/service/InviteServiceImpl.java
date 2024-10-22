@@ -82,9 +82,9 @@ public class InviteServiceImpl implements InviteService {
 
     @Override
     public boolean doesExist(InviteRequest postRequestBody) {
-        return inviteRepository.existsByIssuer_IdAndReceiver_IdAndStatus(
-                postRequestBody.issuerId(),
-                postRequestBody.receiverId(),
+        return inviteRepository.existsByIssuer_UsernameAndReceiver_UsernameAndStatus(
+                postRequestBody.issuerUsername(),
+                postRequestBody.receiverUsername(),
                 InviteStatus.PENDING);
     }
 }

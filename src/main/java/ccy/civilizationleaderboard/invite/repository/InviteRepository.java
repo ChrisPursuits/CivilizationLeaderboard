@@ -9,5 +9,5 @@ import java.util.List;
 public interface InviteRepository extends JpaRepository<Invite, Integer> {
 
     List<Invite> findAllByReceiverId(Integer receiverId);
-    boolean existsByIssuer_IdAndReceiver_IdAndStatus(Integer issuerId, Integer receiverId, InviteStatus status);
+    boolean existsByIssuer_UsernameAndReceiver_UsernameAndStatus(String issuerUsername, String receiverUsername, InviteStatus status);
 }
