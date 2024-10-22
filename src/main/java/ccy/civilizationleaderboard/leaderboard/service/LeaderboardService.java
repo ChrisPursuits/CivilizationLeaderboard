@@ -20,4 +20,6 @@ public interface LeaderboardService {
     void acceptedInvitation(Invite invite );
 
     List<LeaderboardResponse> getAllLeaderboardsByUsername(String username);
+
+    boolean isUserInLeaderboard(int leaderboardId, String username);
 }

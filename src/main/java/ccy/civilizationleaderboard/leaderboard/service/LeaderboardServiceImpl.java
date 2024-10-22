@@ -48,6 +48,11 @@ public class LeaderboardServiceImpl implements LeaderboardService {
                 .toList();
     }
 
+    @Override
+    public boolean isUserInLeaderboard(int leaderboardId, String username) {
+        return leaderboardRepository.isUserInLeaderboard(leaderboardId, username);
+    }
+
 
     @Override
     public LeaderboardResponse createLeaderboard(LeaderboardRequest postRequest) {
