@@ -6,7 +6,7 @@ import ccy.civilizationleaderboard.user.model.User;
 
 public record GameStatRequest(
         int gameId,
-        int userId,
+        String username,
         int civilizationId,
         Placement placement,
         int victoryPoints,

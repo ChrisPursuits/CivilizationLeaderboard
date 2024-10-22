@@ -24,7 +24,7 @@ public class GameStatRequestMapper implements Function<GameStatRequest, GameStat
     @Override
     public GameStat apply(GameStatRequest gameStatRequest) {
 
-        User user = userRepository.findById(gameStatRequest.userId()).orElse(null);
+        User user = userRepository.findByUsername(gameStatRequest.username()).orElse(null);
         Game game = gameRepository.findById(gameStatRequest.gameId()).orElse(null);
         Civilization civilization = civilizationRepository.findById(gameStatRequest.civilizationId()).orElse(null);
 
