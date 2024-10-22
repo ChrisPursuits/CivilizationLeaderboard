@@ -41,6 +41,11 @@ public class InviteController {
     @PostMapping("/invite")
     public ResponseEntity<InviteResponse> sendInvite(@RequestBody InviteRequest inviteRequest) {
 
+        boolean doesReceiverExist = userService.doesExist(inviteRequest.receiverUsername());
+        if (!doesReceiverExist) {
+            return ResponseEntity.notFound().build();
+        }
+
         ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.POST, EntityType.INVITE, inviteRequest);
         if (validationResponse != null) {
             return ResponseEntity
