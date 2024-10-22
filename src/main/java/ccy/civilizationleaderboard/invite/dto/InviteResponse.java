@@ -4,7 +4,8 @@ import java.util.Date;
 
 public record InviteResponse(
         int inviteId,
-        int issuerId,
+        String issuerUsername,
+        String receiverUsername,
         Date issuedDate
 ) {
 }

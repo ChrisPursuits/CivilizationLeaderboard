@@ -13,7 +13,8 @@ public class InviteResponseMapper implements Function<Invite, InviteResponse> {
     public InviteResponse apply(Invite invite) {
         return new InviteResponse(
                 invite.getId(),
-                invite.getIssuer().getId(),
+                invite.getIssuer().getUsername(),
+                invite.getReceiver().getUsername(),
                 invite.getIssuedDate()
         );
     }
