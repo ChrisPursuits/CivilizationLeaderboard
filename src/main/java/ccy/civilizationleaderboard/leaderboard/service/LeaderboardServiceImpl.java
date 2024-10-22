@@ -89,14 +89,14 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     }
 
     @Override
-    public LeaderboardResponse addUserToLeaderboard(int leaderboardId, int userId) {
+    public LeaderboardResponse addUserToLeaderboard(int leaderboardId, String username) {
 
         Optional<Leaderboard> leaderboardOptional = leaderboardRepository.findById(leaderboardId);
         if (leaderboardOptional.isEmpty()) {
             return null;
         }
 
-        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isEmpty()) {
             return null;
         }

@@ -16,7 +16,7 @@ public interface LeaderboardService {
     boolean doesExist(int id);
     boolean doesExist(LeaderboardRequest postRequest);
 
-    LeaderboardResponse addUserToLeaderboard(int leaderboardId, int userId);
+    LeaderboardResponse addUserToLeaderboard(int leaderboardId, String username);
     void acceptedInvitation(Invite invite );
 
     List<LeaderboardResponse> getAllLeaderboardsByUsername(String username);

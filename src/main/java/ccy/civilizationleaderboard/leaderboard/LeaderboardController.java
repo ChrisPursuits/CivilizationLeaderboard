@@ -39,12 +39,12 @@ public class LeaderboardController {
     }
 
 
-    @GetMapping("/leaderboard/{username}")
+    @GetMapping("/leaderboard/user/{username}")
     public ResponseEntity<List<LeaderboardResponse>> getLeaderboardsByUsername(@PathVariable String username) {
 
         boolean doesExist = userService.doesExist(username);
         if (!doesExist) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
 
         List<LeaderboardResponse> response = leaderboardService.getAllLeaderboardsByUsername(username);
@@ -71,15 +71,11 @@ public class LeaderboardController {
     }
 
 
-
-
-
-
     //TODO
     //consider removing this endpoint as it forcefully adds a user to a leaderboard, might be fun to have for an admin, lol.
     @PostMapping("/leaderboard/{leaderboardId}")
     public ResponseEntity<LeaderboardResponse> addUserToLeaderboard(@PathVariable int leaderboardId,
-                                                                    @RequestParam int userId) {
+                                                                    @RequestParam String username) {
 
         ResponseEntity<Void> validationResponse = requestValidator.validateRequest(HttpMethod.GET, EntityType.LEADERBOARD, leaderboardId);
         if (validationResponse != null) {
@@ -88,12 +84,12 @@ public class LeaderboardController {
                     .build();
         }
 
-        boolean doesExist = userService.doesExist(userId);
+        boolean doesExist = userService.doesExist(username);
         if (!doesExist) {
             return ResponseEntity.notFound().build();
         }
 
-        LeaderboardResponse response = leaderboardService.addUserToLeaderboard(leaderboardId, userId);
+        LeaderboardResponse response = leaderboardService.addUserToLeaderboard(leaderboardId, username);
         return ResponseEntity.ok(response);
     }
 
